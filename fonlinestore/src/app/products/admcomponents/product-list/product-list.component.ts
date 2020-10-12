@@ -13,6 +13,8 @@ export class ProductListComponent implements OnInit {
   product: Product[];
   closeResult = '';
   searchValue = '';
+  p = 1;            // pt paginare si urmatoarea la fel
+  numberOfItemsPerP = 10;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -48,6 +50,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   open(content, id) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
