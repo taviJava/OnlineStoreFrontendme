@@ -10,7 +10,7 @@ import { Category } from '../../model/category';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-  category: Category[];
+  categories: Category[];
   closeResult = '';
   searchValue = '';
   constructor(private categoryservice: CategoryService,
@@ -19,13 +19,13 @@ export class CategoryListComponent implements OnInit {
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.getAll()
+    this.getAll();
   }
 // tslint:disable-next-line:typedef
   getAll() {
     this.categoryservice.findAll().subscribe(data => {
-      this.category = [];
-      this.category = data;
+      this.categories = [];
+      this.categories = data;
     });
   }
   // tslint:disable-next-line:typedef
