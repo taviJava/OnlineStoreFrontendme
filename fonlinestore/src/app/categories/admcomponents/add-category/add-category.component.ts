@@ -18,7 +18,7 @@ export class AddCategoryComponent implements OnInit {
   }
 // tslint:disable-next-line:typedef
   getAll() {
-    this.router.navigate(['category']);
+    this.router.navigate(['categories']);
   }
   // tslint:disable-next-line:typedef
   onSubmit(){
