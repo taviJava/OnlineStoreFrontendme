@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,14 +13,23 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddCategoryComponent } from './categories/admcomponents/add-category/add-category.component';
+import { ProductListComponent } from './products/admcomponents/product-list/product-list.component';
+import { ProductAddComponent } from './products/admcomponents/product-add/product-add.component';
+import { ProductEditComponent } from './products/admcomponents/product-edit/product-edit.component';
+import {NgModule} from '@angular/core';
 
 
-// @ts-ignore
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     CategoryListComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ProductListComponent,
+    ProductAddComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
