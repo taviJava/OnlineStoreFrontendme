@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryService } from '../../service/category.service';
-import { Category } from '../../model/category';
+import {Category} from '../../model/category';
+import {CategoryService} from '../../service/category.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-subcategory',
+  templateUrl: './subcategory.component.html',
+  styleUrls: ['./subcategory.component.css']
 })
-export class CategoryListComponent implements OnInit {
-  categories: Category[];
-  allCategories: Category[] = [];
+export class SubcategoryComponent implements OnInit {
+  subcategories: Category[];
+  categories: Category[] = [];
   closeResult = '';
   searchValue = '';
   constructor(private categoryservice: CategoryService,
@@ -25,23 +25,23 @@ export class CategoryListComponent implements OnInit {
 // tslint:disable-next-line:typedef
   getAll() {
     this.categoryservice.findAll().subscribe(data => {
+      this.subcategories = [];
       this.categories = [];
-      this.allCategories = [];
-      this.allCategories = data;
-      for (const category of this.allCategories){
-        if (category.parent === null){
-          this.categories.push(category);
+      this.categories = data;
+      for (const category of this.categories){
+        if (category.parent != null){
+          this.subcategories.push(category);
         }
       }
     });
   }
   // tslint:disable-next-line:typedef
   add(){
-    this.router.navigate(['addCategory']);
+    this.router.navigate(['addsubcategory']);
   }
   // tslint:disable-next-line:typedef
-  editContinent(id: number) {
-    this.router.navigate(['editCategory/' + id]);
+  edit(id: number) {
+    this.router.navigate(['editsubcategory/' + id]);
   }
   // tslint:disable-next-line:typedef
   delete(id: number) {
@@ -68,4 +68,5 @@ export class CategoryListComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 }

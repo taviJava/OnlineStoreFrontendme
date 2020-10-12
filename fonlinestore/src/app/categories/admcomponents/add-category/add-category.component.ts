@@ -24,4 +24,5 @@ export class AddCategoryComponent implements OnInit {
   onSubmit(){
     this.categoryservice.save(this.category).subscribe(result => this.getAll());
   }
+
 }
