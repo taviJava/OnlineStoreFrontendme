@@ -6,7 +6,7 @@ import { ProductEditComponent } from './products/admcomponents/product-edit/prod
 import {AddCategoryComponent} from './categories/admcomponents/add-category/add-category.component';
 import {CategoryListComponent} from './categories/admcomponents/category-list/category-list.component';
 
-const routes: Routes = [{path: 'product', component: ProductListComponent},
+const routes: Routes = [{path: 'products', component: ProductListComponent},
   {path: 'addProduct', component: ProductAddComponent},
   {path: 'editProduct', component: ProductEditComponent},
   {path: 'addCategory', component: AddCategoryComponent},

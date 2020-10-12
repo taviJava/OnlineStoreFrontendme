@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from '../../model/product';
 import {ProductService} from '../../services/product.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +10,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  product: Product[];
+  product: Product[] = [];
   closeResult = '';
   searchValue = '';
   p = 1;            // pt paginare si urmatoarea la fel
@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getAll() {
     this.productService.findAll().subscribe(data => {
+      this.product = [];
       this.product = data;
     });
   }

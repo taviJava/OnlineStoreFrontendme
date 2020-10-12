@@ -15,8 +15,7 @@
               <div class="input-group">
                 <input type="text" [(ngModel)]="searchValue" class="form-control">
                 <div class="col">
-                  <button (click)="addAll()" class="btn btn-outline-success "><i  class="fa fa-plus  ">
-                  </i></button><p >Add Product</p>
+                  <button (click)="addAll()" class="btn btn-outline-success "> Add </button>
 
                 </div>
               </div>
@@ -33,10 +32,9 @@
 
         <td>
           <div class="btn-group">
-            <button (click)="edit(prod.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button (click)="open(content, prod.id)" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+            <button (click)="edit(prod.id)" class="btn btn-outline-primary mx-1"> Edit </button>
+            <button (click)="open(content, prod.id)" class="btn btn-outline-danger"> Delete
             </button>
-
           </div>
         </td>
       </tr>

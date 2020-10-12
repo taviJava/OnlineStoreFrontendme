@@ -1,11 +1,15 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-dark">
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Administrator
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" routerLink="/categories">Category</a>
-      <a class="dropdown-item" routerLink="/product">Product</a>
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-secondary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem><a class="dropdown-item" href="/categories">Category</a></button>
+          <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
+
+
