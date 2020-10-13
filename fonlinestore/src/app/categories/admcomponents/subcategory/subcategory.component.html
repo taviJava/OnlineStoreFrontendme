@@ -22,7 +22,7 @@
       <tr *ngFor="let subcategory of subcategories" >
         <td>{{ (subcategories.indexOf(subcategory)+1)}}</td>
         <td>{{subcategory.name }}</td>
-        <td>{{subcategory.parent.name }}</td>
+        <td>{{subcategory.parent.name}}</td>
         <td>
           <div class="btn-group">
             <button (click)="edit(subcategory.id)" class="btn btn-outline-primary mx-1"> Edit </button>

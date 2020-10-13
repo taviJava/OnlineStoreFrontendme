@@ -20,20 +20,16 @@ export class SubcategoryComponent implements OnInit {
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.categories = [];
+    this.subcategories = [];
     this.getAll();
   }
 // tslint:disable-next-line:typedef
   getAll() {
-    this.categoryservice.findAll().subscribe(data => {
-      this.subcategories = [];
-      this.categories = [];
-      this.categories = data;
-      for (const category of this.categories){
-        if (category.subcategories === null){
-          this.subcategories.push(category);
-        }
-      }
-    });
+   this.categoryservice.findSub().subscribe(data => {
+     this.subcategories = [];
+     this.subcategories = data;
+   });
   }
   // tslint:disable-next-line:typedef
   add(){

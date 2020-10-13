@@ -34,7 +34,7 @@ export class ProductAddComponent implements OnInit {
     this.producttypes.push('perKg');
     this.category = [];
     this.manufacturers = [];
-    this.categoryService.findAll().subscribe(data => {
+    this.categoryService.findSub().subscribe(data => {
       this.category = [];
       this.category = data; });
     this.manufacturerService.findAll().subscribe( data => {
