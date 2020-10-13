@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userEdit="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="user.email"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter continent name"
+               required #email="ngModel">
+        <div [hidden]="!email.pristine" class="alert alert-danger">email is required</div>
+      </div>
+
+      <div class="btn-group">
+        <a (click)="goToUser()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!userEdit.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
