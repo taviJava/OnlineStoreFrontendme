@@ -5,12 +5,20 @@ import { ProductAddComponent } from './products/admcomponents/product-add/produc
 import { ProductEditComponent } from './products/admcomponents/product-edit/product-edit.component';
 import {AddCategoryComponent} from './categories/admcomponents/add-category/add-category.component';
 import {CategoryListComponent} from './categories/admcomponents/category-list/category-list.component';
+import {SubcategoryComponent} from './categories/admcomponents/subcategory/subcategory.component';
+import {SubcategoryAddComponent} from './categories/admcomponents/subcategory-add/subcategory-add.component';
+import {ManufacturerListComponent} from './manufacturers/admcomponents/manufacturer-list/manufacturer-list.component';
+import {AddManufacturerComponent} from './manufacturers/admcomponents/add-manufacturer/add-manufacturer.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent},
   {path: 'addProduct', component: ProductAddComponent},
   {path: 'editProduct', component: ProductEditComponent},
   {path: 'addCategory', component: AddCategoryComponent},
-  {path: 'categories', component: CategoryListComponent}];
+  {path: 'categories', component: CategoryListComponent},
+  {path: 'subcategories', component: SubcategoryComponent},
+  {path: 'addsubcategory', component: SubcategoryAddComponent},
+  {path: 'manufacturers', component: ManufacturerListComponent},
+  {path: 'addManufacturer', component: AddManufacturerComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
