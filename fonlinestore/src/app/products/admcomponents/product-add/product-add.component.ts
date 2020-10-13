@@ -60,7 +60,7 @@ export class ProductAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.product.manufacturer = this.selectedManufacturer[0];
-    this.product.subcategory = this.selectedCategory[0];
+    this.product.category = this.selectedCategory[0];
     this.productService.save(this.product).subscribe(result => this.getList());
   }
 

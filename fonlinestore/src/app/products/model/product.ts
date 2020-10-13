@@ -9,6 +9,6 @@ export class Product {
   price: number;
   orderline: any;
   productType: string;
-  subcategory: Category;
+  category: Category;
   manufacturer: Manufacturer;
 }

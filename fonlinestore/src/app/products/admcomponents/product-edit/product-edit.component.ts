@@ -30,7 +30,7 @@ export class ProductEditComponent implements OnInit {
       this.product = new Product();
       this.selectedCategory = [];
       this.product = data;
-      this.selectedCategory.push(this.product.subcategory);
+      this.selectedCategory.push(this.product.category);
     });
     this.categoryService.findAll().subscribe(data => this.category = data);
     this.dropdownSettings = {
@@ -51,7 +51,7 @@ export class ProductEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    this.product.subcategory = this.selectedCategory[0];
+    this.product.category = this.selectedCategory[0];
     this.productService.update(this.product).subscribe(result => this.gotoList());
   }
   // tslint:disable-next-line:typedef

@@ -29,7 +29,7 @@ export class SubcategoryComponent implements OnInit {
       this.categories = [];
       this.categories = data;
       for (const category of this.categories){
-        if (category.parent != null){
+        if (category.subcategories === null){
           this.subcategories.push(category);
         }
       }
