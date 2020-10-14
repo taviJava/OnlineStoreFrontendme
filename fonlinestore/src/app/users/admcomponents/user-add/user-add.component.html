@@ -1,29 +1,71 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #manufacturerAdd="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]= myGroup #manufacturerAdd="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="user.email"
+        <label for="name">Email</label>
+        <input type="email" formControlName="email"
                class="form-control"
                id="name"
                name="name"
                placeholder="Enter your email"
-               required #email="ngModel">
+               required #formControlName>
       </div>
-      <div [hidden]="!email.pristine" class="alert alert-danger">v is required</div>
+      <div [hidden]="!formControlName" class="alert alert-danger">email is required</div>
 
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Photo</label>
 
-        <input type="text" [(ngModel)]="user.url"
+        <input type="text" formControlName="url"
                class="form-control"
                id="url"
                name="name"
-               placeholder="Enter your email"
-               required #url="ngModel">
+               placeholder="Enter your url photo"
+               required #formControlName>
       </div>
-      <div [hidden]="!url.pristine" class="alert alert-danger">url is required</div>
+      <div [hidden]="!formControlName" class="alert alert-danger">url photo is required</div>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" formControlName="street"
+               class="form-control"
+               id="street"
+               name="street"
+               placeholder="Enter your street"
+               required #formControlName >
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Street is required</div>
 
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" formControlName="city"
+               class="form-control"
+               id="city"
+               name="city"
+               placeholder="Enter your city"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">City is required</div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" formControlName="country"
+               class="form-control"
+               id="country"
+               name="country"
+               placeholder="Enter your country"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Country is required</div>
+
+      <div class="form-group">
+        <label for="zipcode">Zip Code</label>
+        <input type="number" formControlName="zipcode"
+               class="form-control"
+               id="zipcode"
+               name="zipcode"
+               placeholder="Enter your zipCode"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">ZipCode is required</div>
 
       <div class="btn-group">
         <a (click)="getAll()"
