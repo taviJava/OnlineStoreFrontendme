@@ -1,45 +1,37 @@
 <div class="card my-5">
   <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th class="align-middle" scope="col">#</th>
-        <th class="align-middle" scope="col">Product name</th>
-
-        <th class="align-middle" scope="col">
-          <div class="row d-flex align-items-center">
-            <div class="col">
-              Operations
-            </div>
-            <div class="col">
-              <div class="input-group">
-                <input type="text" [(ngModel)]="searchValue" class="form-control">
-                <div class="col">
-                  <button (click)="addAll()" class="btn btn-outline-success "> Add </button>
-
-                </div>
-              </div>
-            </div>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="btn-group" style="padding-right: 300px">
+          <button (click)="addAll()" class="btn btn-success " > Add </button>
+        </div>
+      <div class="navbar-nav" style="padding-right: 300px">
+        <h4  class="nav-item text-primary text-center"><strong>Products</strong></h4>
+      </div>
+        <form class="form-inline" >
+        <div class="input-group">
+          <input type="text" [(ngModel)]="searchValue" class="form-control" >
+          <div class="input-group-append" >
+            <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
           </div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
-        <td>{{ (product.indexOf(prod)+1)}}</td>
-        <td>{{prod.name }}</td>
-
-
-        <td>
-          <div class="btn-group">
-            <button (click)="edit(prod.id)" class="btn btn-outline-primary mx-1"> Edit </button>
-            <button (click)="open(content, prod.id)" class="btn btn-outline-danger"> Delete
-            </button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        </div>
+          </form>
+    </nav>
+<div class="card-deck" >
+  <div class="card" style="width: 400px;" *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+    <img *ngIf="prod.photo | async as photo"  [src]="photo[0].url" style="height: 250px" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{prod.name}}</h5>
+      <p class="card-text">{{prod.description}}</p>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button (click)="edit(prod.id)" class="btn btn-outline-primary mx-1"> Edit </button>
+        <button (click)="open(content, prod.id)" class="btn btn-outline-danger"> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>

@@ -86,6 +86,27 @@
           <div [hidden]="" class="alert alert-danger">Manufacturer is required</div>
         </ng-multiselect-dropdown>
       </div>
+      ------------
+      <div *ngIf="currentFile" class="progress">
+        <div
+          class="progress-bar progress-bar-info progress-bar-striped"
+          role="progressbar"
+          attr.aria-valuenow="{{ progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: progress + '%' }"
+        >
+          {{ progress }}%
+        </div>
+      </div>
+
+      <label class="btn btn-default">
+        <input type="file" (change)="selectFile($event)" />
+      </label>
+
+
+      <div class="alert alert-light" role="alert">{{ message }}</div>
+      ------------
       <div class="btn-group">
         <a (click)="getList()"
            class="btn btn-secondary mx-1">Back

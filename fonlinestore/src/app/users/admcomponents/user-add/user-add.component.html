@@ -12,17 +12,7 @@
       </div>
       <div [hidden]="!formControlName" class="alert alert-danger">email is required</div>
 
-      <div class="form-group">
-        <label for="name">Photo</label>
 
-        <input type="text" formControlName="url"
-               class="form-control"
-               id="url"
-               name="name"
-               placeholder="Enter your url photo"
-               required #formControlName>
-      </div>
-      <div [hidden]="!formControlName" class="alert alert-danger">url photo is required</div>
       <div class="form-group">
         <label for="street">Street</label>
         <input type="text" formControlName="street"
@@ -66,7 +56,27 @@
                required #formControlName>
       </div>
       <div [hidden]="!formControlName" class="alert alert-danger">ZipCode is required</div>
+-----
+      <div *ngIf="currentFile" class="progress">
+        <div
+          class="progress-bar progress-bar-info progress-bar-striped"
+          role="progressbar"
+          attr.aria-valuenow="{{ progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: progress + '%' }"
+        >
+          {{ progress }}%
+        </div>
+      </div>
 
+      <label class="btn btn-default">
+        <input type="file" (change)="selectFile($event)" />
+      </label>
+
+
+      <div class="alert alert-light" role="alert">{{ message }}</div>
+----
       <div class="btn-group">
         <a (click)="getAll()"
            class="btn btn-secondary mx-1">Back

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../model/product';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,12 @@ import {HttpClient} from '@angular/common/http';
 export class ProductService {
 private productUrl: string;
 
+private photoUrl: string;
+
 
   constructor(private http: HttpClient) {
   this.productUrl = 'http://localhost:8080/product';
+  this.photoUrl = 'http://localhost:8080/photop';
   }
 
   public findAll(): Observable<Product[]> {
@@ -32,4 +35,18 @@ private productUrl: string;
   public delete(id: number) {
     return this.http.delete(`${this.productUrl}/${id}`);
   }
+public upload(photo: File): Observable<HttpEvent<any>> {
+  const formData: FormData = new FormData();
+  formData.append('photo', photo);
+  const req = new HttpRequest('POST', this.photoUrl, formData, {
+    reportProgress: true,
+    responseType: 'json'
+  });
+  return this.http.request(req);
+}
+
+  getPhotos(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8080/photoP/${id}`);
+  }
+
 }

@@ -23,8 +23,9 @@ import { SubcategoryComponent } from './categories/admcomponents/subcategory/sub
 import { SubcategoryAddComponent } from './categories/admcomponents/subcategory-add/subcategory-add.component';
 import { ManufacturerListComponent } from './manufacturers/admcomponents/manufacturer-list/manufacturer-list.component';
 import { AddManufacturerComponent } from './manufacturers/admcomponents/add-manufacturer/add-manufacturer.component';
-
-
+import {UserAddComponent} from './users/admcomponents/user-add/user-add.component';
+import {UserEditComponent} from './users/admcomponents/user-edit/user-edit.component';
+import {UserListComponent} from './users/admcomponents/user-list/user-list.component';
 
 
 
@@ -41,6 +42,9 @@ import { AddManufacturerComponent } from './manufacturers/admcomponents/add-manu
     SubcategoryAddComponent,
     ManufacturerListComponent,
     AddManufacturerComponent,
+    UserAddComponent,
+    UserEditComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,

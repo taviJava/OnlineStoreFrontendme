@@ -31,6 +31,9 @@ export class ProductListComponent implements OnInit {
     this.productService.findAll().subscribe(data => {
       this.product = [];
       this.product = data;
+      for (const prod of this.product){
+        prod.photo = this.productService.getPhotos(prod.id);
+      }
     });
   }
 

@@ -3,6 +3,7 @@ import {User} from '../../model/user';
 import {UserService} from '../../service/user.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -10,9 +11,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  user: User[];
+  users: User[];
   closeResult = '';
   searchValue = '';
+  photo: Observable<any>;
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -22,12 +25,17 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.photo = this.userService.getPhoto();
   }
 
   // tslint:disable-next-line:typedef
   getAll() {
     this.userService.findAll().subscribe(data => {
-      this.user = data;
+      this.users = [];
+      this.users = data;
+      for (const user of this.users){
+        user.photo = this.userService.getUserPhoto(user.id);
+      }
     });
   }
 
@@ -35,7 +43,6 @@ export class UserListComponent implements OnInit {
   add() {
     this.router.navigate(['addUser']);
   }
-
   // tslint:disable-next-line:typedef
   edit(id: number) {
     this.router.navigate(['editUser/' + id]);

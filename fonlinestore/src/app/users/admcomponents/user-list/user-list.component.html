@@ -5,7 +5,7 @@
       <tr>
         <th class="align-middle" scope="col">#</th>
         <th class="align-middle" scope="col">User mail</th>
-        <th class="align-middle" scope="col">User url</th>
+        <th class="align-middle" scope="col">User photo</th>
         <th class="align-middle" scope="col">
           <div class="row d-flex align-items-center">
             <div class="col">
@@ -23,16 +23,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let us of user">
+      <tr *ngFor="let us of users">
         <td>{{us.id }}</td>
         <td>{{us.email }}</td>
-        <td>{{us.url }}</td>
+        <td ><img *ngIf="us.photo | async as photo"  [src]="photo[0].url" alt="Avatar" class="avatar"></td>
         <td>
 
           <div class="btn-group">
             <button (click)="edit(us.id)" class="btn btn-primary mx-1">Edit</button>
-            <button (click)="open(content, us.id)" class="btn btn-outline-danger"><i class="fa fa-trash"></i>
-
+            <button (click)="open(content, us.id)" class="btn btn-outline-danger"> Delete
             </button>
           </div>
         </td>
