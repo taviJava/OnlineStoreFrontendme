@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,6 +26,15 @@ import { AddManufacturerComponent } from './manufacturers/admcomponents/add-manu
 import {UserAddComponent} from './users/admcomponents/user-add/user-add.component';
 import {UserEditComponent} from './users/admcomponents/user-edit/user-edit.component';
 import {UserListComponent} from './users/admcomponents/user-list/user-list.component';
+import { LoginComponent } from './users/admcomponents/login/login.component';
+import {UserService} from './users/service/user.service';
+import {HttpInterceptorService} from './users/service/http-interceptor.service';
+import { RoleComponent } from './security/admcomponents/role/role.component';
+import { PrivilegeComponent } from './security/admcomponents/privilege/privilege.component';
+import { AddPrivilegeComponent } from './security/admcomponents/add-privilege/add-privilege.component';
+import { AddRoleComponent } from './security/admcomponents/add-role/add-role.component';
+import { RolePrivilegeComponent } from './security/admcomponents/role-privilege/role-privilege.component';
+import { RoleUserComponent } from './security/admcomponents/role-user/role-user.component';
 
 
 
@@ -45,6 +54,13 @@ import {UserListComponent} from './users/admcomponents/user-list/user-list.compo
     UserAddComponent,
     UserEditComponent,
     UserListComponent,
+    LoginComponent,
+    RoleComponent,
+    PrivilegeComponent,
+    AddPrivilegeComponent,
+    AddRoleComponent,
+    RolePrivilegeComponent,
+    RoleUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +76,12 @@ import {UserListComponent} from './users/admcomponents/user-list/user-list.compo
     BrowserModule, NgxPaginationModule, BrowserAnimationsModule,
     CarouselModule, WavesModule
   ],
-  providers: [],
+  providers: [UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

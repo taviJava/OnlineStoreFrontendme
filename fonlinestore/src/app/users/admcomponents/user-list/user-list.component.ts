@@ -11,9 +11,11 @@ import {Observable} from 'rxjs';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: User[];
+  users: User[] = [];
   closeResult = '';
   searchValue = '';
+  p = 1;            // pt paginare si urmatoarea la fel
+  numberOfItemsPerP = 10;
   photo: Observable<any>;
 
 
@@ -25,7 +27,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-    this.photo = this.userService.getPhoto();
   }
 
   // tslint:disable-next-line:typedef
@@ -34,9 +35,12 @@ export class UserListComponent implements OnInit {
       this.users = [];
       this.users = data;
       for (const user of this.users){
-        user.photo = this.userService.getUserPhoto(user.id);
+        user.photo = this.getPhoto(user.id);
       }
     });
+  }
+  getPhoto(id: number): Observable<any>{
+    return this.userService.getUserPhoto(id);
   }
 
   // tslint:disable-next-line:typedef

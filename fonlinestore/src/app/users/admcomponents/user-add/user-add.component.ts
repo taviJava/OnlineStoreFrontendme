@@ -20,6 +20,8 @@ export class UserAddComponent implements OnInit {
   currentFile: File;
   progress = 0;
   message = '';
+  matched = true;
+  confirmPassword = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -31,13 +33,23 @@ export class UserAddComponent implements OnInit {
     this.address = new Address();
     this.myGroup = new FormGroup({
       email: new FormControl(),
+      password: new FormControl(),
       street: new FormControl(),
       city: new FormControl(),
       country: new FormControl(),
-      zipcode: new FormControl()
+      zipcode: new FormControl(),
+      confirmPassword: new FormControl()
     });
   }
-
+  // tslint:disable-next-line:typedef
+  matchPasswords() {
+    this.confirmPassword = this.myGroup.get('confirmPassword').value;
+    if (this.user.newPassword === '' || this.user.newPassword === this.confirmPassword) {
+      this.matched = true;
+    } else {
+      this.matched = false;
+    }
+  }
   // tslint:disable-next-line:typedef
   getAll() {
     this.router.navigate(['users']);
@@ -46,6 +58,7 @@ export class UserAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.user.email = this.myGroup.get('email').value;
+    this.user.password = this.myGroup.get('password').value;
     this.address.street = this.myGroup.get('street').value;
     this.address.city = this.myGroup.get('city').value;
     this.address.zipCode = this.myGroup.get('zipcode').value;

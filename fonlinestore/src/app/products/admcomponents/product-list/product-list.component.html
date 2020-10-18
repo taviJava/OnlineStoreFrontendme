@@ -7,32 +7,36 @@
       <div class="navbar-nav" style="padding-right: 300px">
         <h4  class="nav-item text-primary text-center"><strong>Products</strong></h4>
       </div>
-        <form class="form-inline" >
+        <div class="form-inline" >
         <div class="input-group">
           <input type="text" [(ngModel)]="searchValue" class="form-control" >
           <div class="input-group-append" >
             <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
           </div>
         </div>
-          </form>
+          </div>
     </nav>
-<div class="card-deck" >
-  <div class="card" style="width: 400px;" *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
-    <img *ngIf="prod.photo | async as photo"  [src]="photo[0].url" style="height: 250px" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{prod.name}}</h5>
-      <p class="card-text">{{prod.description}}</p>
-    </div>
-    <div class="card-footer">
-      <div class="btn-group">
-        <button (click)="edit(prod.id)" class="btn btn-outline-primary mx-1"> Edit </button>
-        <button (click)="open(content, prod.id)" class="btn btn-outline-danger"> Delete
-        </button>
+
+    <div class="row">
+      <div class="col-sm-4"  *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+        <div class="card text-black-50 bg-light mb-4">
+          <div class="card-body" >
+            <img *ngIf="prod.photo | async as photo"  [src]="photo[0].url"   height="250px"  class="card-img-top" alt="...">
+            <div style="height: 100px">
+            <h5 class="card-title">{{prod.name}}</h5>
+            <p  class="card-text">{{prod.description}}</p>
+            </div>
+            <div class="btn-group">
+              <button (click)="edit(prod.id)" class="btn btn-primary mx-1"> Edit </button>
+              <button (click)="open(content, prod.id)" class="btn btn-danger"> Delete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
   </div>
 </div>
 <ng-template #content let-modal>

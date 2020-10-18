@@ -1,26 +1,113 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #userEdit="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]= myGroup #manufacturerAdd="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="user.email"
+        <label for="name">Email</label>
+        <input type="email" formControlName="email"
                class="form-control"
                id="name"
                name="name"
-               placeholder="Enter continent name"
-               required #email="ngModel">
-        <div [hidden]="!email.pristine" class="alert alert-danger">email is required</div>
+               placeholder="Enter your email"
+               required #formControlName>
       </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">email is required</div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="newPassword"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="Enter your new password"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">New password is required</div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword"
+               class="form-control"
+               id="confirmPassword"
+               name="confirmPassword"
+               placeholder="Confirm new password"
+               (keyup)="matchPasswords()">
+      </div>
+      <div [hidden]="matched"  class="alert alert-danger">Passwords don't match</div>
+
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" formControlName="street"
+               class="form-control"
+               id="street"
+               name="street"
+               placeholder="Enter your street"
+               required #formControlName >
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Street is required</div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" formControlName="city"
+               class="form-control"
+               id="city"
+               name="city"
+               placeholder="Enter your city"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">City is required</div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" formControlName="country"
+               class="form-control"
+               id="country"
+               name="country"
+               placeholder="Enter your country"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Country is required</div>
+
+      <div class="form-group">
+        <label for="zipcode">Zip Code</label>
+        <input type="number" formControlName="zipcode"
+               class="form-control"
+               id="zipcode"
+               name="zipcode"
+               placeholder="Enter your zipCode"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">ZipCode is required</div>
+
+      <div *ngIf="currentFile" class="progress">
+        <div
+          class="progress-bar progress-bar-info progress-bar-striped"
+          role="progressbar"
+          attr.aria-valuenow="{{ progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: progress + '%' }"
+        >
+          {{ progress }}%
+        </div>
+      </div>
+
+      <label class="btn btn-default">
+        <input type="file" (change)="selectFile($event)" />
+      </label>
+
+
+      <div class="alert alert-light" role="alert">{{ message }}</div>
 
       <div class="btn-group">
         <a (click)="goToUser()"
            class="btn btn-secondary mx-1">Back
         </a>
-        <button type="submit" [disabled]="!userEdit.form.valid"
+        <button type="submit" [disabled]="!manufacturerAdd.form.valid"
                 class="btn btn-info">Submit
         </button>
       </div>
     </form>
   </div>
 </div>
+
 

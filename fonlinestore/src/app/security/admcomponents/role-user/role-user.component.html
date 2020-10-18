@@ -1,0 +1,25 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userAdd="ngForm">
+      <div class="form-group">
+        <label for="users">Users</label>
+        <ng-multiselect-dropdown
+          [data]="users"
+          [placeholder]="'Select User/Users'"
+          id="users"
+          [(ngModel)]="selectedUsers"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+          <div [hidden]="" class="alert alert-danger">User/Users is required</div>
+
+        </ng-multiselect-dropdown>
+        <button type="submit" [disabled]="!userAdd.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

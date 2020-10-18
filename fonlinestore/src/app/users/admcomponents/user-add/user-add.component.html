@@ -11,8 +11,26 @@
                required #formControlName>
       </div>
       <div [hidden]="!formControlName" class="alert alert-danger">email is required</div>
-
-
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="Enter your password"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">password is required</div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword"
+               class="form-control"
+               id="confirmPassword"
+               name="confirmPassword"
+               placeholder="Confirm new password"
+               (keyup)="matchPasswords()">
+      </div>
+      <div [hidden]="matched"  class="alert alert-danger">Passwords don't match</div>
       <div class="form-group">
         <label for="street">Street</label>
         <input type="text" formControlName="street"
@@ -56,7 +74,7 @@
                required #formControlName>
       </div>
       <div [hidden]="!formControlName" class="alert alert-danger">ZipCode is required</div>
------
+
       <div *ngIf="currentFile" class="progress">
         <div
           class="progress-bar progress-bar-info progress-bar-striped"
@@ -76,7 +94,7 @@
 
 
       <div class="alert alert-light" role="alert">{{ message }}</div>
-----
+
       <div class="btn-group">
         <a (click)="getAll()"
            class="btn btn-secondary mx-1">Back

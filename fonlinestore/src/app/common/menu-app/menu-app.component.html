@@ -9,10 +9,24 @@
           <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
+          <button ngbDropdownItem><a class="dropdown-item" href="/roles">Roles</a></button>
+          <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
         </div>
       </div>
     </div>
   </div>
+  <ul class="navbar-nav ml-auto">
+    <li ngbDropdown class="nav-item dropdown">
+      <a ngbDropdownToggle class="nav-link text-white dropdown-toggle" id="navbarDropdownMenuLink"
+         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+        <i class="fa fa-user-circle"></i> {{currentUser.email}}
+      </a>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a ngbDropdownItem class="dropdown-item" (click)="logOut()" style="cursor: pointer">Log Out</a>
+      </div>
+    </li>
+  </ul>
 </nav>
+
 
 

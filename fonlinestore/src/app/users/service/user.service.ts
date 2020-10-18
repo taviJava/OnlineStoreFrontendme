@@ -54,4 +54,9 @@ export class UserService {
   getUserPhoto(id: number): Observable<any>{
     return this.http.get(`http://localhost:8080/photo/${id}`);
   }
+
+  // tslint:disable-next-line:typedef
+  public getByUsername(userName: string): Observable<any> {
+    return this.http.get(`${this.userUrl}/getbyusername/${userName}`);
+  }
 }
