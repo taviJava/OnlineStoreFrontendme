@@ -35,6 +35,13 @@ import { AddPrivilegeComponent } from './security/admcomponents/add-privilege/ad
 import { AddRoleComponent } from './security/admcomponents/add-role/add-role.component';
 import { RolePrivilegeComponent } from './security/admcomponents/role-privilege/role-privilege.component';
 import { RoleUserComponent } from './security/admcomponents/role-user/role-user.component';
+import {CategoryEditComponent} from './categories/admcomponents/category-edit/category-edit.component';
+import {SubcategoryEditComponent} from './categories/admcomponents/subcategory-edit/subcategory-edit.component';
+import { ProductsComponent } from './products/components/products/products.component';
+import { ProductViewComponent } from './products/components/product-view/product-view.component';
+import { OrderComponent } from './orders/components/order/order.component';
+import { OrderListComponent } from './orders/components/order-list/order-list.component';
+import { OrderAddComponent } from './orders/components/order-add/order-add.component';
 
 
 
@@ -61,6 +68,13 @@ import { RoleUserComponent } from './security/admcomponents/role-user/role-user.
     AddRoleComponent,
     RolePrivilegeComponent,
     RoleUserComponent,
+    CategoryEditComponent,
+    SubcategoryEditComponent,
+    ProductsComponent,
+    ProductViewComponent,
+    OrderComponent,
+    OrderListComponent,
+    OrderAddComponent,
   ],
   imports: [
     BrowserModule,

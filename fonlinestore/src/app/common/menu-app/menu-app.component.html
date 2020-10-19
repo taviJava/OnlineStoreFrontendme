@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-dark">
-  <div class="row">
+  <div class="row" *ngIf="hasPrivilege()">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-secondary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
@@ -11,6 +11,7 @@
           <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/roles">Roles</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
+          <button ngbDropdownItem><a class="dropdown-item" href="/orders">Orders</a></button>
         </div>
       </div>
     </div>

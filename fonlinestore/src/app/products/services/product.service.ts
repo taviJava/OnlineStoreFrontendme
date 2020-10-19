@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../model/product';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
+import {Order} from '../../orders/model/order';
+import {Ordermodel} from '../../orders/model2/ordermodel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 private productUrl: string;
-
 private photoUrl: string;
 
 
@@ -23,6 +24,11 @@ private photoUrl: string;
   // tslint:disable-next-line:typedef
   public save(product: Product) {
     return this.http.post<Product>(this.productUrl, product);
+  }
+  // tslint:disable-next-line:typedef
+  public save2(order: Ordermodel) {
+    console.log(order);
+    return this.http.put<Order>('http://localhost:8080/orders', order);
   }
   // tslint:disable-next-line:typedef
   public update(product: Product) {

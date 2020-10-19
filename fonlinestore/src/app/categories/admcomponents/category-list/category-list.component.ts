@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../../service/category.service';
-import { Category } from '../../model/category';
+import {Category} from '../../model/category';
 
 @Component({
   selector: 'app-category-list',

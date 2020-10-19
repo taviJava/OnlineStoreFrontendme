@@ -59,4 +59,9 @@ export class UserService {
   public getByUsername(userName: string): Observable<any> {
     return this.http.get(`${this.userUrl}/getbyusername/${userName}`);
   }
+
+  // tslint:disable-next-line:typedef
+  public getRolesByUsername(userName: string): Observable<any> {
+    return this.http.get(`${this.userUrl}/privileges/${userName}`);
+  }
 }

@@ -40,7 +40,7 @@ export class MenuAppComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  hasPrivilege(privS: string): boolean {
-    return this.authService.hasPrivilege(privS);
+  hasPrivilege(): boolean {
+    return this.authService.hasPrivilege();
   }
 }

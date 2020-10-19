@@ -1,0 +1,39 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #subcategoryAdd="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="subcategory.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter city name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+      <div class="form-group">
+        <label for="categories">Categories</label>
+        <ng-multiselect-dropdown
+          [data]="categories"
+          [placeholder]="'Select the Category'"
+          id="categories"
+          [(ngModel)]="selectedCategories"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+          <div [hidden]="" class="alert alert-danger">Categories is required</div>
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="btn-group">
+        <a (click)="getAll()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!subcategoryAdd.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

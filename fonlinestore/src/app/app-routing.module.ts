@@ -22,27 +22,36 @@ import {RolePrivilegeComponent} from './security/admcomponents/role-privilege/ro
 import {RoleUserComponent} from './security/admcomponents/role-user/role-user.component';
 import {AuthenticationService} from './users/service/authentication.service';
 import {AuthGuard2Service} from './users/service/auth-guard2.service';
+import {ProductsComponent} from './products/components/products/products.component';
+import {ProductViewComponent} from './products/components/product-view/product-view.component';
+import {OrderListComponent} from './orders/components/order-list/order-list.component';
+import {OrderAddComponent} from './orders/components/order-add/order-add.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
-  {path: 'editProduct/:id', component: ProductEditComponent, canActivate: [AuthGuardService]},
+  {path: 'editProduct/:id', component: ProductEditComponent, canActivate: [AuthGuard2Service]},
   {path: 'addCategory', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
-  {path: 'categories', component: CategoryListComponent, canActivate: [AuthGuardService]},
-  {path: 'subcategories', component: SubcategoryComponent, canActivate: [AuthGuardService]},
-  {path: 'addsubcategory', component: SubcategoryAddComponent, canActivate: [AuthGuardService]},
-  {path: 'manufacturers', component: ManufacturerListComponent, canActivate: [AuthGuardService]},
-  {path: 'addManufacturer', component: AddManufacturerComponent, canActivate: [AuthGuardService]},
-  {path: 'users', component: UserListComponent, canActivate: [AuthGuardService]},
-  {path: 'addUser', component: UserAddComponent, canActivate: [AuthGuardService]},
-  {path: 'editUser/:id', component: UserEditComponent, canActivate: [AuthGuardService]},
-  {path: 'roles', component: RoleComponent, canActivate: [AuthGuardService]},
-  {path: 'privileges', component: PrivilegeComponent, canActivate: [AuthGuardService]},
-  {path: 'addrole', component: AddRoleComponent, canActivate: [AuthGuardService]},
-  {path: 'addprivilege', component: AddPrivilegeComponent, canActivate: [AuthGuardService]},
-  {path: 'roleprivileges/:id', component: RolePrivilegeComponent, canActivate: [AuthGuardService]},
-  {path: 'roleusers/:id', component: RoleUserComponent, canActivate: [AuthGuardService]},
+  {path: 'categories', component: CategoryListComponent, canActivate: [AuthGuard2Service]},
+  {path: 'subcategories', component: SubcategoryComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addsubcategory', component: SubcategoryAddComponent, canActivate: [AuthGuard2Service]},
+  {path: 'manufacturers', component: ManufacturerListComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addManufacturer', component: AddManufacturerComponent, canActivate: [AuthGuard2Service]},
+  {path: 'users', component: UserListComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addUser', component: UserAddComponent},
+  {path: 'editUser/:id', component: UserEditComponent, canActivate: [AuthGuard2Service]},
+  {path: 'roles', component: RoleComponent, canActivate: [AuthGuard2Service]},
+  {path: 'privileges', component: PrivilegeComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addrole', component: AddRoleComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addprivilege', component: AddPrivilegeComponent, canActivate: [AuthGuard2Service]},
+  {path: 'roleprivileges/:id', component: RolePrivilegeComponent, canActivate: [AuthGuard2Service]},
+  {path: 'roleusers/:id', component: RoleUserComponent, canActivate: [AuthGuard2Service]},
+  {path: 'editCategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
+  {path: 'editsubcategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
+  {path: 'orders', component: OrderListComponent, canActivate: [AuthGuard2Service]},
+  {path: 'viewProduct/:id', component: ProductViewComponent},
 {path: 'login', component: LoginComponent},
-{path: '', component: LoginComponent},
+  {path: 'login', component: OrderAddComponent},
+  {path: '', component: ProductsComponent},
 ];
 
 @NgModule({

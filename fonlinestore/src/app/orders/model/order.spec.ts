@@ -1,6 +1,6 @@
-import { Order } from './category';
+import { Order } from './order';
 
-describe('Category', () => {
+describe('Order', () => {
   it('should create an instance', () => {
     expect(new Order()).toBeTruthy();
   });

@@ -10,7 +10,7 @@ import {Role} from '../../model/role';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
-  roles: Role[];
+  roles: Role[] = [];
   closeResult = '';
 
   constructor(private roleService: RoleService,
@@ -27,6 +27,7 @@ export class RoleComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getRoles() {
     this.roleService.findAll().subscribe(data => {
+      this.roles = [];
       this.roles = data;
     });
   }

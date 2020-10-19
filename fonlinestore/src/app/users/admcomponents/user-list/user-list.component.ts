@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   p = 1;            // pt paginare si urmatoarea la fel
   numberOfItemsPerP = 10;
   photo: Observable<any>;
+  value: boolean;
 
 
   constructor(private route: ActivatedRoute,
@@ -27,7 +28,9 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.verifyValue();
   }
+
 
   // tslint:disable-next-line:typedef
   getAll() {
@@ -78,6 +81,12 @@ export class UserListComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  verifyValue(): boolean{
+if (this.users.length > 0){
+  return true;
+}else{
+  return false;
+}
+}
 
 }

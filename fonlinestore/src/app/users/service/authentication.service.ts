@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from './user.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
-import {CanActivate} from '@angular/router';
+
+import {Role} from '../../security/model/role';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +22,11 @@ export class AuthenticationService {
   public password: string;
   public user: User;
   public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public roles: Role[];
+  public ret = false;
+  public isPrivilege: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private userService: UserService) {
-
+  constructor(private http: HttpClient, public userService: UserService) {
   }
 
   // tslint:disable-next-line:typedef
@@ -80,33 +84,23 @@ export class AuthenticationService {
     }
     return user;
   }
+  // tslint:disable-next-line:typedef
+  returnUser(){
+    return JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
+  }
 
-  hasPrivilege(privS: string): boolean {
+  hasPrivilege(): boolean {
     const user = JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
     if (user && user.roleList) {
       for (const role of user.roleList) {
-        for (const priv of role.privilegeList) {
-          if (priv.name === privS) {
+        if (role.name === 'Administrator') {
+            this.isPrivilege.next(true);
             return true;
-          }
         }
       }
     }
+    this.isPrivilege.next(false);
     return false;
   }
 
-  userPrivilegeAdm(): boolean {
-    const privS = 'Full Control';
-    const user = JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
-    if (user && user.roleList) {
-      for (const role of user.roleList) {
-        for (const priv of role.privilegeList) {
-          if (priv.name === privS) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
 }

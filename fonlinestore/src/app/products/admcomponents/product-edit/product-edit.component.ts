@@ -12,7 +12,7 @@ import {Category} from '../../../categories/model/category';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  product: Product;
+  product: Product = new Product();
   id: number;
   dropdownSettings: IDropdownSettings = {};
   category: Category[];
@@ -46,7 +46,7 @@ export class ProductEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   gotoList() {
-    this.router.navigate(['product']);
+    this.router.navigate(['products']);
   }
 
   // tslint:disable-next-line:typedef
