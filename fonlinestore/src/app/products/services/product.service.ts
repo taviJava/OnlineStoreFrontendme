@@ -28,7 +28,7 @@ private photoUrl: string;
   // tslint:disable-next-line:typedef
   public save2(order: Ordermodel) {
     console.log(order);
-    return this.http.put<Order>('http://localhost:8080/orders', order);
+    return this.http.post<Order>('http://localhost:8080/orders', order);
   }
   // tslint:disable-next-line:typedef
   public update(product: Product) {

@@ -27,4 +27,9 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  viewOrder(id: number){
+    this.router.navigate(['viewOrder/' + id]);
+  }
+
 }

@@ -42,6 +42,7 @@ import { ProductViewComponent } from './products/components/product-view/product
 import { OrderComponent } from './orders/components/order/order.component';
 import { OrderListComponent } from './orders/components/order-list/order-list.component';
 import { OrderAddComponent } from './orders/components/order-add/order-add.component';
+import { TestComponent } from './test/componets/test/test.component';
 
 
 
@@ -75,6 +76,7 @@ import { OrderAddComponent } from './orders/components/order-add/order-add.compo
     OrderComponent,
     OrderListComponent,
     OrderAddComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

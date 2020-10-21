@@ -1,3 +1,5 @@
+import {Orderline} from './orderline';
+
 export class Order {
   id: number;
   username: string;
@@ -6,5 +8,5 @@ export class Order {
   userAddress: string;
   orderDate: string;
   status: string;
-  orderLines: any;
+  orderLines: Orderline[];
 }

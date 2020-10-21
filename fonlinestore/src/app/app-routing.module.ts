@@ -26,6 +26,8 @@ import {ProductsComponent} from './products/components/products/products.compone
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import {OrderListComponent} from './orders/components/order-list/order-list.component';
 import {OrderAddComponent} from './orders/components/order-add/order-add.component';
+import {OrderComponent} from './orders/components/order/order.component';
+import {TestComponent} from './test/componets/test/test.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
@@ -49,9 +51,11 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'editsubcategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
   {path: 'orders', component: OrderListComponent, canActivate: [AuthGuard2Service]},
   {path: 'viewProduct/:id', component: ProductViewComponent},
+  {path: 'viewOrder/:id', component: OrderComponent},
 {path: 'login', component: LoginComponent},
   {path: 'login', component: OrderAddComponent},
   {path: '', component: ProductsComponent},
+  {path: 'test', component: TestComponent},
 ];
 
 @NgModule({

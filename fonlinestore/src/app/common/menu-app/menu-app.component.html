@@ -1,9 +1,15 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-dark">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-expand-sm navbar-light bg-dark" style="padding-right: 50px">
   <div class="row" *ngIf="hasPrivilege()">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-secondary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="padding-left: 100px">
           <button ngbDropdownItem><a class="dropdown-item" href="/categories">Category</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/subcategories">Subcategory</a></button>
           <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
@@ -16,14 +22,41 @@
       </div>
     </div>
   </div>
-  <ul class="navbar-nav ml-auto">
+    <div class="col-lg-9 col-sm-9" *ngIf="login()">
+  <div ngbDropdown class="d-inline-block" style="padding-right: 0px">
+    <button class="btn btn-info dropdown-toggle" id="dropdownBasic2" ngbDropdownToggle><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      Cart <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span></button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown" >
+      <div class="row total-header-section" >
+        <div class="col-lg-6 col-sm-6 col-6">
+          <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px"></i> <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
+          <p>Total: <span class="text-info">${{order.totalCost}}</span></p>
+        </div>
+      </div>
+      <div class="row cart-detail" *ngFor="let ordLn of order.orderLines">
+        <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+          <img *ngIf="ordLn.product.photo | async as photo"  [src]="photo[0].url">
+        </div>
+        <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+          <p>{{ordLn.product.name}}</p>
+          <span class="price text-info"> ${{ordLn.productPrice}}</span> <span class="count"> Quantity:{{ordLn.productsQuantity}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+  <ul class="navbar-nav ml-auto" >
     <li ngbDropdown class="nav-item dropdown">
       <a ngbDropdownToggle class="nav-link text-white dropdown-toggle" id="navbarDropdownMenuLink"
          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
         <i class="fa fa-user-circle"></i> {{currentUser.email}}
       </a>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a ngbDropdownItem class="dropdown-item" (click)="logOut()" style="cursor: pointer">Log Out</a>
+        <a ngbDropdownItem class="dropdown-item" (click)="logOut()" style="cursor: pointer" *ngIf="login()">Log Out</a>
+        <a ngbDropdownItem class="dropdown-item" (click)="logOut()" style="cursor: pointer" *ngIf="login()">Log in</a>
       </div>
     </li>
   </ul>

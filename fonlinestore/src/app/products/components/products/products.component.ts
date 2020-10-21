@@ -40,16 +40,7 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  // tslint:disable-next-line:typedef
-  addOrder(){
-  this.order.username = 'tavi.zorila@gmail.com';
-  this.order.deliveryAddress = 'test';
-  this.order.status = 'pending';
-  this.order.totalCost = 300;
-  this.order.userAddress = 'tets2';
-  this.productService.save2(this.order);
-  this.router.navigate(['']);
-  }
+
 
   // tslint:disable-next-line:typedef
   addAll() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Order} from '../model/order';
+import {Orderline} from '../model/orderline';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +11,22 @@ export class OrderService {
   private orderUrl: string;
 
   constructor(private http: HttpClient) {
-    this.orderUrl = 'http://localhost:8080/';
+    this.orderUrl = 'http://localhost:8080/orders';
   }
 
   public findAll(): Observable<Order[]> {
     return this.http.get<Order[]>(this.orderUrl);
   }
-  // @PostMapping("/orders/{username}/{id}")
-  // tslint:disable-next-line:typedef
-  // public save(order: Order, username: string, id: number) {
-  //   return this.http.post<Order>(`${this.orderUrl}/${username}/${id}`, order);
-  // }
-
   public saveBegin(order: Order): Observable<Order>{
-    console.log(order.username);
-    return this.http.put<Order>('', order);
+    return this.http.post<Order>('http://localhost:8080/orders', order);
+  }
+  // tslint:disable-next-line:typedef
+  public updateQuantity(quantity: number, id: number, orderline: Orderline){
+  return this.http.put<Orderline>(`${this.orderUrl}/${quantity}/${id}`, orderline);
+  }
+  // tslint:disable-next-line:typedef
+  public save(username: string, id: number, orderline: Orderline){
+    return this.http.post<Orderline>(`${this.orderUrl}/${username}/${id}`, orderline);
   }
   // tslint:disable-next-line:typedef
   public update(order: Order) {
@@ -38,5 +40,12 @@ export class OrderService {
   // tslint:disable-next-line:typedef
   public delete(id: number) {
     return this.http.delete(`${this.orderUrl}/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  public deleteOrdLn(id: number){
+    return this.http.delete(`${this.orderUrl}/OrdLn/${id}`);
+  }
+  public getByUserName(username: string): Observable<any> {
+    return this.http.get(`${this.orderUrl}/${username}/find`);
   }
 }
