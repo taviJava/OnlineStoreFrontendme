@@ -1,0 +1,72 @@
+<app-menu-app></app-menu-app>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- Cele trei div uri-->
+
+      <div class="card my-5">
+        <div class="card-body">
+          <nav class="navbar navbar-expand-md navbar-light bg-light" style="padding-right: 10px">
+
+            <div class="navbar-nav " style="padding-right: 690px">
+              <h4  class="nav-item text-primary text-center"><strong>Products</strong></h4>
+            </div>
+            <ul class="navbar-nav navbar-right" >
+              <li class="nav-item">
+                <div class="form-inline " >
+                  <div class="input-group">
+                    <input type="text" [(ngModel)]="searchValue" class="form-control" >
+                    <div class="input-group-append" >
+                      <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="row">
+            <div class="col-sm-4"  *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+              <div class="card text-black-50 bg-light mb-4">
+                <div class="card-body" >
+                  <img *ngIf="prod.photo | async as photo"  [src]="photo[0].url"   height="250px"  class="card-img-top" alt="...">
+                  <div style="height: 100px">
+                    <h5 class="card-title">{{prod.name}}</h5>
+                    <p  class="card-text">{{prod.description}}</p>
+                  </div>
+                  <div class="btn-group">
+                    <button (click)="viewProduct(prod.id)" class="btn btn-primary"> View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+        </div>
+      </div>
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 text-center">
+              Are you sure you want to delete this item?
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+

@@ -20,6 +20,9 @@ export class CategoryService {
     return this.http.get<Category[]>(this.categoryUrl + 'Sub');
   }
 
+  public findSubByCatId(id: number): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.categoryUrl}SubById/${id}`);
+  }
   // tslint:disable-next-line:typedef
   public save(category: Category) {
     return this.http.post<Category[]>(this.categoryUrl, category);

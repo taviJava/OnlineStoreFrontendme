@@ -1,11 +1,121 @@
-<div class="card my-5">
-  <div class="card-body">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-      <div class="navbar-nav" style="padding-right: 500px">
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/productsSt">
+          <i class="fa fa-home " style="color: blue"></i>
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="row" *ngIf="hasPrivilege()" style="padding-top: 13px">
+          <div class="col" >
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="text-align: center">
+                <button ngbDropdownItem><a class="dropdown-item"  href="/categories">Category</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/subcategories">Subcategory</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/roles">Roles</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/orders">Orders</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li style="padding-top: 14px">
+        <div ngbDropdown class="d-inline-block">
+          <button  data-toggle="dropdown" ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle">
+            Products by Category
+          </button>
+          <ul class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+
+            <li class="dropdown-submenu" *ngFor="let cat of categories" >
+              <a  style="text-align: center" >{{cat.name}}</a>
+              <ul class="dropdown-menu">
+                <li *ngFor="let subCat of cat.subcategories"><a href="productsCat/{{subCat.id}}" >{{subCat.name}}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <div class="col-lg-12 col-sm-12 mr-0" *ngIf="login()">
+          <div ngbDropdown class="d-inline-block" >
+            <button class="btn btn-outline-primary dropdown-toggle mr-1" id="dropdownBasic2" ngbDropdownToggle><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              Cart <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span></button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown test" >
+              <div class="row total-header-section" >
+                <div class="col-lg-4 col-sm-4 col-4">
+                  <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px"></i> <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span>
+                </div>
+                <div   >
+                  <a (click)="viewOrder(order.id)"><span class="text-info"><< View Cart </span></a>
+
+                </div>
+                <div class="col-lg-4 col-sm4 col-4 total-section text-right">
+                  <p>Total: <span class="text-info">${{order.totalCost}}</span></p>
+                </div>
+              </div>
+              <div class="row cart-detail" *ngFor="let ordLn of order.orderLines">
+                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                  <img *ngIf="ordLn.product.photo | async as photo"  [src]="photo[0].url">
+                </div>
+                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                  <p>{{ordLn.product.name}}</p>
+                  <span class="price text-info"> ${{ordLn.productPrice}}</span> <span class="count"> Quantity:{{ordLn.productsQuantity}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="row ">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic3" ngbDropdownToggle><i class="fa fa-user-circle"></i> {{currentUser.email}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1"  class="overflow-auto">
+                <button ngbDropdownItem ><a class="dropdown-item"  (click)="logOut()" >Log Out</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<!-- Se termina Navbar-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- Cele trei div uri-->
+
+    <div class="card my-5">
+  <div class="card-body">
+    <nav class="navbar navbar-expand-md navbar-light bg-light" style="padding-right: 10px">
+
+      <div class="navbar-nav " style="padding-right: 690px">
         <h4  class="nav-item text-primary text-center"><strong>Products</strong></h4>
       </div>
-      <div class="form-inline" >
+      <ul class="navbar-nav navbar-right" >
+        <li class="nav-item">
+      <div class="form-inline " >
         <div class="input-group">
           <input type="text" [(ngModel)]="searchValue" class="form-control" >
           <div class="input-group-append" >
@@ -13,6 +123,8 @@
           </div>
         </div>
       </div>
+        </li>
+      </ul>
     </nav>
 
     <div class="row">
@@ -54,3 +166,7 @@
     <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
   </div>
 </ng-template>
+
+    </div>
+  </div>
+  </div>

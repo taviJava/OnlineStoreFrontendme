@@ -4,7 +4,11 @@ import {ProductService} from '../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrderService} from '../../../orders/service/order.service';
-import {Ordermodel} from '../../../orders/model2/ordermodel';
+import {AuthenticationService} from '../../../users/service/authentication.service';
+import {User} from '../../../users/model/user';
+import {Order} from '../../../orders/model/order';
+import {Category} from '../../../categories/model/category';
+import {CategoryService} from '../../../categories/service/category.service';
 
 @Component({
   selector: 'app-products',
@@ -12,22 +16,45 @@ import {Ordermodel} from '../../../orders/model2/ordermodel';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  order: Ordermodel = new Ordermodel();
   product: Product[] = [];
   closeResult = '';
   searchValue = '';
   p = 1;            // pt paginare si urmatoarea la fel
   numberOfItemsPerP = 10;
+  currentUser: User;
+  order: Order = new Order();
+  isLoggedIn = false;
+  categories: Category[];
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router,
               private modalService: NgbModal,
-              private ordService: OrderService) {
+              private orderService: OrderService,
+              private authService: AuthenticationService,
+              private catService: CategoryService
+              ) {
   }
 
   ngOnInit(): void {
     this.getAll();
+    this.chargeCart();
+
+    this.authService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+      this.currentUser = new User();
+      if (this.isLoggedIn) {
+        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+        if (this.currentUser === null) {
+          this.currentUser = new User();
+        }
+      }
+    });
+    this.categories = [];
+    this.catService.findAll().subscribe(data => {
+      this.categories = [];
+      this.categories = data;
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -82,6 +109,38 @@ export class ProductsComponent implements OnInit {
   // tslint:disable-next-line:typedef
   viewProduct(id: number){
     this.router.navigate(['viewProduct/' + id]);
+  }
+
+  // tslint:disable-next-line:typedef
+  chargeCart(){
+    this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+    this.orderService.getByUserName(this.currentUser.email).subscribe(data => {
+      this.order = new Order();
+      this.order = data;
+      for (const ordLn of this.order.orderLines){
+        ordLn.product.photo = this.productService.getPhotos(ordLn.product.id);
+      }
+    });
+  }
+  // tslint:disable-next-line:typedef
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['login']);
+  }
+  login(): boolean{
+    return this.authService.isLoggedIn.getValue();
+  }
+  isLogout(): boolean{
+    return this.login() !== true;
+  }
+
+  hasPrivilege(): boolean {
+    return this.authService.hasPrivilege();
+  }
+
+  // tslint:disable-next-line:typedef
+  viewOrder(id: number){
+    this.router.navigate(['viewOrder/' + id]);
   }
 
 }

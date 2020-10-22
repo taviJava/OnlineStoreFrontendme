@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from '../../../products/model/product';
+import {Product} from '../../model/product';
 import {User} from '../../../users/model/user';
 import {Order} from '../../../orders/model/order';
-import {ProductService} from '../../../products/services/product.service';
+import {ProductService} from '../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {OrderService} from '../../../orders/service/order.service';
 import {AuthenticationService} from '../../../users/service/authentication.service';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-products-cat',
+  templateUrl: './products-cat.component.html',
+  styleUrls: ['./products-cat.component.css']
 })
-export class TestComponent implements OnInit {
+export class ProductsCatComponent implements OnInit {
   product: Product[] = [];
   closeResult = '';
   searchValue = '';
@@ -22,6 +22,7 @@ export class TestComponent implements OnInit {
   currentUser: User;
   order: Order = new Order();
   isLoggedIn = false;
+  id: number;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -33,7 +34,8 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
+    this.id = this.route.snapshot.params.id;
+    this.getProdsByCat(this.id);
     this.chargeCart();
 
     this.authService.isLoggedIn.subscribe(data => {
@@ -49,8 +51,8 @@ export class TestComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  getAll() {
-    this.productService.findAll().subscribe(data => {
+  getProdsByCat(id: number) {
+    this.productService.getProductsByCategory(id).subscribe(data => {
       this.product = [];
       this.product = data;
       for (const prod of this.product){
@@ -73,7 +75,7 @@ export class TestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   delete(id: number) {
     this.productService.delete(id).subscribe(data => {
-      this.getAll();
+      this.ngOnInit();
     });
   }
 

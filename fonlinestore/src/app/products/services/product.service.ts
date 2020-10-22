@@ -55,4 +55,8 @@ public upload(photo: File): Observable<HttpEvent<any>> {
     return this.http.get(`http://localhost:8080/photoP/${id}`);
   }
 
+  getProductsByCategory(id: number): Observable<Product[]>{
+    return this.http.get<Product[]>(`${this.productUrl}/category/${id}`);
+  }
+
 }

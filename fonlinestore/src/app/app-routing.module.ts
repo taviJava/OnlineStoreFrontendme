@@ -28,6 +28,8 @@ import {OrderListComponent} from './orders/components/order-list/order-list.comp
 import {OrderAddComponent} from './orders/components/order-add/order-add.component';
 import {OrderComponent} from './orders/components/order/order.component';
 import {TestComponent} from './test/componets/test/test.component';
+import {MenuAppComponent} from './common/menu-app/menu-app.component';
+import {ProductsCatComponent} from './products/components/products-cat/products-cat.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
@@ -50,12 +52,14 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'editCategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
   {path: 'editsubcategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
   {path: 'orders', component: OrderListComponent, canActivate: [AuthGuard2Service]},
-  {path: 'viewProduct/:id', component: ProductViewComponent},
-  {path: 'viewOrder/:id', component: OrderComponent},
+  {path: 'viewProduct/:id', component: ProductViewComponent , canActivate: [AuthGuardService]},
+  {path: 'viewOrder/:id', component: OrderComponent , canActivate: [AuthGuardService]},
 {path: 'login', component: LoginComponent},
   {path: 'login', component: OrderAddComponent},
-  {path: '', component: ProductsComponent},
+  {path: '', component: LoginComponent},
+  {path: 'productsSt', component: ProductsComponent, canActivate: [AuthGuardService]},
   {path: 'test', component: TestComponent},
+  {path: 'productsCat/:id', component: ProductsCatComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

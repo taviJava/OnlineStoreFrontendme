@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       setTimeout(() =>
         {
           this.addNewOrder(this.username);
-          this.router.navigate(['']);
+          this.router.navigate(['productsSt']);
         },
         2000);
     }, () => {

@@ -43,6 +43,7 @@ import { OrderComponent } from './orders/components/order/order.component';
 import { OrderListComponent } from './orders/components/order-list/order-list.component';
 import { OrderAddComponent } from './orders/components/order-add/order-add.component';
 import { TestComponent } from './test/componets/test/test.component';
+import { ProductsCatComponent } from './products/components/products-cat/products-cat.component';
 
 
 
@@ -77,6 +78,7 @@ import { TestComponent } from './test/componets/test/test.component';
     OrderListComponent,
     OrderAddComponent,
     TestComponent,
+    ProductsCatComponent,
   ],
   imports: [
     BrowserModule,

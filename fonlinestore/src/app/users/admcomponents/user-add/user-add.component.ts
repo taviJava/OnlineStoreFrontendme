@@ -5,6 +5,7 @@ import {UserService} from '../../service/user.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Address} from '../../model/address';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {AuthenticationService} from '../../service/authentication.service';
 
 
 @Component({
@@ -22,10 +23,15 @@ export class UserAddComponent implements OnInit {
   message = '';
   matched = true;
   confirmPassword = '';
+  isLoggedIn = false;
+  currentUser: User;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthenticationService) {
+    this.currentUser = new User();
+    this.currentUser.email = 'Please Log-in';
   }
 
   ngOnInit(): void {
@@ -39,6 +45,16 @@ export class UserAddComponent implements OnInit {
       country: new FormControl(),
       zipcode: new FormControl(),
       confirmPassword: new FormControl()
+    });
+    this.authService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+      this.currentUser = new User();
+      if (this.isLoggedIn) {
+        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+        if (this.currentUser === null) {
+          this.currentUser = new User();
+        }
+      }
     });
   }
   // tslint:disable-next-line:typedef
@@ -98,5 +114,9 @@ export class UserAddComponent implements OnInit {
       });
 
     this.selectedFiles = undefined;
+  }
+
+  login(): boolean{
+    return this.authService.isLoggedIn.getValue();
   }
 }
