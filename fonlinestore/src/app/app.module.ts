@@ -44,6 +44,10 @@ import { OrderListComponent } from './orders/components/order-list/order-list.co
 import { OrderAddComponent } from './orders/components/order-add/order-add.component';
 import { TestComponent } from './test/componets/test/test.component';
 import { ProductsCatComponent } from './products/components/products-cat/products-cat.component';
+import {ManufacturerEditComponent} from './manufacturers/admcomponents/manufacturer-edit/manufacturer-edit.component';
+import { PromoCodeAddComponent } from './promoCodes/admcomponents/promo-code-add/promo-code-add.component';
+import { PromoCodeEditComponent } from './promoCodes/admcomponents/promo-code-edit/promo-code-edit.component';
+import {PromoCodeListComponent} from './promoCodes/admcomponents/promo-code-list/promo-code-list.component';
 
 
 
@@ -79,6 +83,10 @@ import { ProductsCatComponent } from './products/components/products-cat/product
     OrderAddComponent,
     TestComponent,
     ProductsCatComponent,
+    ManufacturerEditComponent,
+    PromoCodeListComponent,
+    PromoCodeAddComponent,
+   PromoCodeEditComponent,
   ],
   imports: [
     BrowserModule,

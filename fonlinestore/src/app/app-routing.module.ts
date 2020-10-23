@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ProductListComponent } from './products/admcomponents/product-list/product-list.component';
-import { ProductAddComponent } from './products/admcomponents/product-add/product-add.component';
-import { ProductEditComponent } from './products/admcomponents/product-edit/product-edit.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {ProductListComponent} from './products/admcomponents/product-list/product-list.component';
+import {ProductAddComponent} from './products/admcomponents/product-add/product-add.component';
+import {ProductEditComponent} from './products/admcomponents/product-edit/product-edit.component';
 import {AddCategoryComponent} from './categories/admcomponents/add-category/add-category.component';
 import {CategoryListComponent} from './categories/admcomponents/category-list/category-list.component';
 import {SubcategoryComponent} from './categories/admcomponents/subcategory/subcategory.component';
@@ -30,6 +30,10 @@ import {OrderComponent} from './orders/components/order/order.component';
 import {TestComponent} from './test/componets/test/test.component';
 import {MenuAppComponent} from './common/menu-app/menu-app.component';
 import {ProductsCatComponent} from './products/components/products-cat/products-cat.component';
+import {ManufacturerEditComponent} from './manufacturers/admcomponents/manufacturer-edit/manufacturer-edit.component';
+import {PromoCodeListComponent} from './promoCodes/admcomponents/promo-code-list/promo-code-list.component';
+import {PromoCodeAddComponent} from './promoCodes/admcomponents/promo-code-add/promo-code-add.component';
+import {PromoCodeEditComponent} from './promoCodes/admcomponents/promo-code-edit/promo-code-edit.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
@@ -52,18 +56,23 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'editCategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
   {path: 'editsubcategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
   {path: 'orders', component: OrderListComponent, canActivate: [AuthGuard2Service]},
-  {path: 'viewProduct/:id', component: ProductViewComponent , canActivate: [AuthGuardService]},
-  {path: 'viewOrder/:id', component: OrderComponent , canActivate: [AuthGuardService]},
-{path: 'login', component: LoginComponent},
+  {path: 'viewProduct/:id', component: ProductViewComponent, canActivate: [AuthGuardService]},
+  {path: 'viewOrder/:id', component: OrderComponent, canActivate: [AuthGuardService]},
+  {path: 'login', component: LoginComponent},
   {path: 'login', component: OrderAddComponent},
   {path: '', component: LoginComponent},
   {path: 'productsSt', component: ProductsComponent, canActivate: [AuthGuardService]},
   {path: 'test', component: TestComponent},
-  {path: 'productsCat/:id', component: ProductsCatComponent, canActivate: [AuthGuardService] }
+  {path: 'productsCat/:id', component: ProductsCatComponent, canActivate: [AuthGuardService]},
+  {path: 'editManufacturer/:id', component: ManufacturerEditComponent, canActivate: [AuthGuard2Service]},
+  {path: 'promoCode', component: PromoCodeListComponent, canActivate: [AuthGuard2Service]},
+  {path: 'addPromoCode', component: PromoCodeAddComponent, canActivate: [AuthGuard2Service]},
+  {path: 'editPromoCode/:id', component: PromoCodeEditComponent, canActivate: [AuthGuard2Service]}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
