@@ -1,1 +1,132 @@
-<p>about-us works!</p>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link btn btn-outline-primary" href="/aboutUs">
+          <i class="fa fa-home mr-1" style="color: blue">H</i>
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" style="padding-top: 18px">
+        <div class="row" *ngIf="hasPrivilege()" >
+          <div class="col" >
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="text-align: center">
+                <button ngbDropdownItem><a class="dropdown-item"  href="/categories">Category</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/subcategories">Subcategory</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/promoCode">Promo</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/orders">Orders</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li style="padding-top: 18px">
+        <div ngbDropdown class="d-inline-block">
+          <button  data-toggle="dropdown" ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle">
+            Products by Category
+          </button>
+          <ul class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+
+            <li class="dropdown-submenu" *ngFor="let cat of categories" >
+              <a  style="text-align: center" >{{cat.name}}</a>
+              <ul class="dropdown-menu">
+                <li *ngFor="let subCat of cat.subcategories"><a href="productsCat/{{subCat.id}}" >{{subCat.name}}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li style="padding-top: 18px">
+        <p>
+          <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+            My Profile
+          </button>
+        </p>
+        <div id="collapseExample" [ngbCollapse]="isCollapsed">
+          <div class="card" style="width: 220px">
+            <div class="card-body" >
+              <a href="/userProfile" ngbDropdownItem>Profile</a>
+              <a href="/userOrders" ngbDropdownItem>My Carts</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li style="padding-top: 18px">
+        <button onclick="location.href = '/productsSt'" type="button" class="btn btn-outline-primary">
+          Products
+        </button>
+      </li>
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <div class="col-lg-12 col-sm-12 mr-0" *ngIf="login()">
+          <div ngbDropdown class="d-inline-block" >
+            <button class="btn btn-outline-primary dropdown-toggle mr-1" id="dropdownBasic2" ngbDropdownToggle><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              Cart <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span></button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown test" >
+              <div class="row total-header-section" >
+                <div class="col-lg-4 col-sm-4 col-4">
+                  <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px"></i> <span class="badge badge-pill badge-danger">{{order.orderLines.length}}</span>
+                </div>
+                <div   >
+                  <a (click)="viewOrder(order.id)"><span class="text-info"><< View Cart </span></a>
+
+                </div>
+                <div class="col-lg-4 col-sm4 col-4 total-section text-right">
+                  <p>Total: <span class="text-info">${{order.totalCost}}</span></p>
+                </div>
+              </div>
+              <div class="row cart-detail" *ngFor="let ordLn of order.orderLines">
+                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                  <img *ngIf="ordLn.product.photo | async as photo"  [src]="photo[0].url">
+                </div>
+                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                  <p>{{ordLn.product.name}}</p>
+                  <span class="price text-info"> ${{ordLn.productPrice}}</span> <span class="count"> Quantity:{{ordLn.productsQuantity}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="row ">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic3" ngbDropdownToggle><i class="fa fa-user-circle"></i> {{currentUser.email}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1"  class="overflow-auto">
+                <button ngbDropdownItem ><a class="dropdown-item"  (click)="logOut()" >Log Out</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div id="clasamea">
+  <section>
+
+      <div class="overlay-dark bg-cover bg-center p-5 mb-5 poza"  style="background: url(https://cdn.shopify.com/s/files/1/0089/3989/6947/files/header-2.2_22418d9f-0cd0-4726-8b2c-136966bd5f3d_800x.jpg?v=1598937460)">
+        <div class="overlay-content text-white text-center p-5">
+          <p class="lead demo-text mb-1">Our mission is what drives us to do everything possible to expand human potential. We do that by creating groundbreaking sport innovations, by making our products more sustainably, by building a creative and diverse global team and by making a positive impact in communities where we live and work.</p>
+          <a class="btn btn-outline-light rounded-0 px-5" href="/productsSt">Get started</a>
+        </div>
+      </div>
+
+  </section>
+</div>
+
+
+

@@ -7,11 +7,21 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" [formGroup]= myGroup #manufacturerAdd="ngForm">
       <div class="form-group">
-        <label for="name">Email</label>
-        <input type="email" formControlName="email"
+        <label for="name">Full name</label>
+        <input type="text" formControlName="name"
                class="form-control"
                id="name"
                name="name"
+               placeholder="Enter your Full name"
+               required #formControlName>
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Full name is required</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email"
+               class="form-control"
+               id="email"
+               name="email"
                placeholder="Enter your email"
                required #formControlName>
       </div>
@@ -36,6 +46,16 @@
                (keyup)="matchPasswords()">
       </div>
       <div [hidden]="matched"  class="alert alert-danger">Passwords don't match</div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="number" formControlName="street"
+               class="form-control"
+               id="phone"
+               name="phone"
+               placeholder="Enter your phone"
+               required #formControlName >
+      </div>
+      <div [hidden]="!formControlName" class="alert alert-danger">Phone is required</div>
       <div class="form-group">
         <label for="street">Street</label>
         <input type="text" formControlName="street"
@@ -80,6 +100,15 @@
       </div>
       <div [hidden]="!formControlName" class="alert alert-danger">ZipCode is required</div>
 
+
+      <div class="form-group">
+      <label for="photo" class="btn btn-primary">Select Photo </label>
+        <input id="photo" name="photo"
+               type="file"
+               (change)="selectFile($event)"
+               required #formControlName/>
+      </div>
+
       <div *ngIf="currentFile" class="progress">
         <div
           class="progress-bar progress-bar-info progress-bar-striped"
@@ -93,11 +122,6 @@
         </div>
       </div>
 
-      <label class="btn btn-default">
-        <input type="file" (change)="selectFile($event)" />
-      </label>
-
-
       <div class="alert alert-light" role="alert">{{ message }}</div>
 
       <div class="btn-group">
@@ -105,7 +129,7 @@
            class="btn btn-secondary mx-1">Back
         </a>
         <button type="submit" [disabled]="!manufacturerAdd.form.valid"
-                class="btn btn-info">Submit
+                class="btn btn-outline-primary">Submit
         </button>
       </div>
     </form>

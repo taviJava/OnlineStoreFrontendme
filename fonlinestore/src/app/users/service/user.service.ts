@@ -64,4 +64,9 @@ export class UserService {
   public getRolesByUsername(userName: string): Observable<any> {
     return this.http.get(`${this.userUrl}/privileges/${userName}`);
   }
+
+  // tslint:disable-next-line:typedef
+  public deletePhoto(id: string) {
+    return this.http.delete(`${this.userUrl}/${id}/photo`);
+  }
 }

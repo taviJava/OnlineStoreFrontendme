@@ -5,7 +5,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
 
-import {Role} from '../../security/model/role';
 
 
 @Injectable({
@@ -22,7 +21,6 @@ export class AuthenticationService {
   public password: string;
   public user: User;
   public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public roles: Role[];
   public ret = false;
   public isPrivilege: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -91,14 +89,10 @@ export class AuthenticationService {
 
   hasPrivilege(): boolean {
     const user = JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
-    if (user && user.roleList) {
-      for (const role of user.roleList) {
-        if (role.name === 'Administrator') {
+    if (user && user.role === 'Administrator') {
             this.isPrivilege.next(true);
             return true;
         }
-      }
-    }
     this.isPrivilege.next(false);
     return false;
   }

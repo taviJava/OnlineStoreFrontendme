@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
       setTimeout(() =>
         {
           this.addNewOrder(this.username);
-          this.router.navigate(['productsSt']);
+          this.router.navigate(['aboutUs']);
         },
-        2000);
+        1500);
     }, () => {
       this.invalidLogin = true;
       this.loginSuccess = false;

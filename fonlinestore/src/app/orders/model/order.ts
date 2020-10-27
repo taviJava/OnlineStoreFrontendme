@@ -1,4 +1,5 @@
 import {Orderline} from './orderline';
+import {Promo} from './promo';
 
 export class Order {
   id: number;
@@ -8,5 +9,6 @@ export class Order {
   userAddress: string;
   orderDate: string;
   status: string;
+  promoCode: Promo;
   orderLines: Orderline[];
 }

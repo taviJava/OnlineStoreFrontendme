@@ -89,4 +89,9 @@ if (this.users.length > 0){
 }
 }
 
+// tslint:disable-next-line:typedef
+goToRoles(id: number){
+    this.router.navigate(['roleusers/' + id]);
+}
+
 }

@@ -38,6 +38,8 @@ export class UserAddComponent implements OnInit {
     this.user = new User();
     this.address = new Address();
     this.myGroup = new FormGroup({
+      name: new FormControl(),
+      phone: new FormControl(),
       email: new FormControl(),
       password: new FormControl(),
       street: new FormControl(),
@@ -73,6 +75,8 @@ export class UserAddComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
+    this.user.fullName = this.myGroup.get('name').value;
+    this.user.phone = this.myGroup.get('phone').value;
     this.user.email = this.myGroup.get('email').value;
     this.user.password = this.myGroup.get('password').value;
     this.address.street = this.myGroup.get('street').value;

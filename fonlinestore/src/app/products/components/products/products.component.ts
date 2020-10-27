@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
   order: Order = new Order();
   isLoggedIn = false;
   categories: Category[];
+  isCollapsed = true;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.order.orderLines = [];
     this.getAll();
     this.chargeCart();
 

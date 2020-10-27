@@ -1,14 +1,17 @@
 import {Address} from './address';
 import {Observable} from 'rxjs';
-import {Role} from '../../security/model/role';
+
 
 export class User {
   id: number;
   password: string;
   newPassword: string;
   email: string;
+  fullName: string;
+  phone: string;
+  idPhoto: string;
   adress: Address;
-  roleList: Role[];
+  role: string;
   photo: Observable<any>;
 
 

@@ -1,47 +1,26 @@
-
-
 <div class="container">
   <div class="row">
-    <h2>Multi level dropdown menu in Bootstrap 3</h2>
-    <hr>
-    <div ngbDropdown class="d-inline-block">
-      <a id="dLabel" role="button" data-toggle="dropdown" ngbDropdownToggle class="btn btn-primary dropdown-toggle">
-        Dropdown
-      </a>
-        <ul class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-        <li><a href="#">Some action</a></li>
-        <li><a href="#">Some other action</a></li>
-        <li class="divider"></li>
-        <li class="dropdown-submenu">
-          <a tabindex="-1" href="#">Hover me for more options</a>
-          <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#">Second level</a></li>
-            <li class="dropdown-submenu">
-              <a href="#">Even More..</a>
-              <ul class="dropdown-menu">
-                <li><a href="#">3rd level</a></li>
-                <li><a href="#">3rd level</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Second level</a></li>
-            <li><a href="#">Second level</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <div class="col-md-6 offset-md-3">
+      <h3 >Choose File</h3>
+      <div class="form-group">
+        <label class="btn btn-primary" > Chose File
+        <input  type="file" name="image" (change)="fileProgress($event)" />
+        </label>
+      </div>
+      <div *ngIf="fileUploadProgress">
+        Upload progress: {{ fileUploadProgress }}
+      </div>
+      <div class="image-preview mb-3" *ngIf="previewUrl">
+        <img [src]="previewUrl" height="300" />
+      </div>
 
-<div ngbDropdown class="d-inline-block">
-  <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="text-align: center">
-    <button ngbDropdownItem><a class="dropdown-item"  href="/categories">Category</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/subcategories">Subcategory</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/roles">Roles</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
-    <button ngbDropdownItem><a class="dropdown-item" href="/orders">Orders</a></button>
+      <div class="mb-3" *ngIf="uploadedFilePath">
+        {{uploadedFilePath}}
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" >Submit</button>
+      </div>
+    </div>
   </div>
 </div>

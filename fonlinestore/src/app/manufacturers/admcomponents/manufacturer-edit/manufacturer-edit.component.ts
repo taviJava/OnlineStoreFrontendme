@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Manufacturer} from '../../model/manufacturer';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ManufacturerService} from '../../service/manufacturer.service';
-import {Address} from '../../../address/model/address';
 
 @Component({
   selector: 'app-manufacturer-edit',

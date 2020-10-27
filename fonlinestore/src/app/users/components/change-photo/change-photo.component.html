@@ -1,0 +1,110 @@
+<app-menu-app></app-menu-app>
+<div class="container">
+  <h1>Edit Profile</h1>
+  <hr>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-3" style="padding-top: 40px">
+      <div class="text-center">
+
+        <div class="text-center">
+          <div *ngIf="!previewUrl">
+          <img *ngIf="user.photo | async as photo "  [src]="photo[0].url"  class="avatar img-circle" alt="avatar">
+          </div>
+          <div *ngIf="previewUrl">
+          <img [src]="previewUrl"  class="avatar img-circle" alt="avatar" />
+          </div>
+          <h6 *ngIf="!previewUrl">Upload a different photo...</h6>
+          <h6 *ngIf="previewUrl">New photo selected...</h6>
+          <div class="btn-group">
+          <label class="btn btn-danger mr-1" > Choose File
+            <input  type="file" name="image" (change)="selectFile($event)" />
+          </label>
+            <button class="btn btn-primary" style="height: 38px" (click)="changePhoto()">Save</button>
+          </div>
+
+        </div>
+      </div>
+      <div *ngIf="currentFile" class="progress">
+        <div
+          class="progress-bar progress-bar-info progress-bar-striped"
+          role="progressbar"
+          attr.aria-valuenow="{{ progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: progress + '%' }"
+        >
+          {{ progress }}%
+        </div>
+      </div>
+    </div>
+
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      </div>
+      <h3>Personal info</h3>
+
+      <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()"  #userEdit="ngForm">
+        <div class="form-group">
+          <label for="fullname" class="col-lg-3 control-label">Full name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" id="fullname" type="text" name="fullname"
+                   [(ngModel)]="user.fullName"
+                   >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" id="email" type="email" name="email"
+                   [(ngModel)]="user.email"
+                   >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="col-lg-3 control-label">Mobile:</label>
+          <div class="col-lg-8">
+            <input class="form-control" id="phone" type="number" name="phone"
+                   [(ngModel)]="user.phone"
+                   >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" id="password" name="password"
+                   type="password" [(ngModel)]="user.password"
+                    >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmpassword" class="col-md-3 control-label">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" id="confirmpassword" name="confirmpassword" type="password"
+                   [(ngModel)]="confirmPassword"
+                   value="{{user.password}}"
+                   >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <div class="btn-group">
+           <button class="btn btn-primary mr-2" [disabled]="!userEdit.form.valid">Save</button>
+            <button class="btn btn-secondary" (click)="backToUserProfile()">Back</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+

@@ -20,6 +20,7 @@ export class MenuAppComponent implements OnInit {
   currentUser: User;
   order: Order = new Order();
   categories: Category[];
+  isCollapsed = true;
 
   constructor(private authService: AuthenticationService,
               private orderService: OrderService,

@@ -8,13 +8,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/productsSt">
-          <i class="fa fa-home " style="color: blue"></i>
+        <a class="nav-link btn btn-outline-primary" href="/aboutUs">
+          <i class="fa fa-home mr-1" style="color: blue">H</i>
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <div class="row" *ngIf="hasPrivilege()" style="padding-top: 13px">
+      <li class="nav-item" style="padding-top: 18px">
+        <div class="row" *ngIf="hasPrivilege()" >
           <div class="col" >
             <div ngbDropdown class="d-inline-block">
               <button class="btn btn-outline-primary dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Administrator</button>
@@ -24,7 +24,7 @@
                 <button ngbDropdownItem><a class="dropdown-item" href="/manufacturers">Manufacturer</a></button>
                 <button ngbDropdownItem><a class="dropdown-item" href="/products">Product</a></button>
                 <button ngbDropdownItem><a class="dropdown-item" href="/users">User</a></button>
-                <button ngbDropdownItem><a class="dropdown-item" href="/roles">Roles</a></button>
+                <button ngbDropdownItem><a class="dropdown-item" href="/promoCode">Promo</a></button>
                 <button ngbDropdownItem><a class="dropdown-item" href="/privileges">Privileges</a></button>
                 <button ngbDropdownItem><a class="dropdown-item" href="/orders">Orders</a></button>
               </div>
@@ -32,7 +32,8 @@
           </div>
         </div>
       </li>
-      <li style="padding-top: 14px">
+
+      <li style="padding-top: 18px">
         <div ngbDropdown class="d-inline-block">
           <button  data-toggle="dropdown" ngbDropdownToggle class="btn btn-outline-primary dropdown-toggle">
             Products by Category
@@ -47,6 +48,27 @@
             </li>
           </ul>
         </div>
+      </li>
+      <li style="padding-top: 18px">
+        <p>
+          <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+            My Profile
+          </button>
+        </p>
+        <div id="collapseExample" [ngbCollapse]="isCollapsed">
+          <div class="card" style="width: 220px">
+            <div class="card-body" >
+              <a href="/userProfile" ngbDropdownItem>Profile</a>
+              <a href="/userOrders" ngbDropdownItem>My Carts</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li style="padding-top: 18px">
+        <button onclick="location.href = '/productsSt'" type="button" class="btn btn-outline-primary">
+          Products
+        </button>
       </li>
     </ul>
     <ul class="navbar-nav ">

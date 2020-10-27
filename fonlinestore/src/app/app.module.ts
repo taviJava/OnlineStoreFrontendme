@@ -29,12 +29,6 @@ import {UserListComponent} from './users/admcomponents/user-list/user-list.compo
 import { LoginComponent } from './users/admcomponents/login/login.component';
 import {UserService} from './users/service/user.service';
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
-import { RoleComponent } from './security/admcomponents/role/role.component';
-import { PrivilegeComponent } from './security/admcomponents/privilege/privilege.component';
-import { AddPrivilegeComponent } from './security/admcomponents/add-privilege/add-privilege.component';
-import { AddRoleComponent } from './security/admcomponents/add-role/add-role.component';
-import { RolePrivilegeComponent } from './security/admcomponents/role-privilege/role-privilege.component';
-import { RoleUserComponent } from './security/admcomponents/role-user/role-user.component';
 import {CategoryEditComponent} from './categories/admcomponents/category-edit/category-edit.component';
 import {SubcategoryEditComponent} from './categories/admcomponents/subcategory-edit/subcategory-edit.component';
 import { ProductsComponent } from './products/components/products/products.component';
@@ -48,6 +42,12 @@ import {ManufacturerEditComponent} from './manufacturers/admcomponents/manufactu
 import { PromoCodeAddComponent } from './promoCodes/admcomponents/promo-code-add/promo-code-add.component';
 import { PromoCodeEditComponent } from './promoCodes/admcomponents/promo-code-edit/promo-code-edit.component';
 import {PromoCodeListComponent} from './promoCodes/admcomponents/promo-code-list/promo-code-list.component';
+import { RoleUsersComponent } from './users/admcomponents/role-users/role-users.component';
+import { AboutUsComponent } from './common/aboutus/about-us/about-us.component';
+import { UserProfileComponent } from './users/componets/user-profile/user-profile.component';
+import { UserOrdersComponent } from './orders/components/user-orders/user-orders.component';
+import { OrderCompletedComponent } from './orders/components/order-completed/order-completed.component';
+import { ChangePhotoComponent } from './users/components/change-photo/change-photo.component';
 
 
 
@@ -68,12 +68,6 @@ import {PromoCodeListComponent} from './promoCodes/admcomponents/promo-code-list
     UserEditComponent,
     UserListComponent,
     LoginComponent,
-    RoleComponent,
-    PrivilegeComponent,
-    AddPrivilegeComponent,
-    AddRoleComponent,
-    RolePrivilegeComponent,
-    RoleUserComponent,
     CategoryEditComponent,
     SubcategoryEditComponent,
     ProductsComponent,
@@ -87,6 +81,12 @@ import {PromoCodeListComponent} from './promoCodes/admcomponents/promo-code-list
     PromoCodeListComponent,
     PromoCodeAddComponent,
    PromoCodeEditComponent,
+   RoleUsersComponent,
+   AboutUsComponent,
+   UserProfileComponent,
+   UserOrdersComponent,
+   OrderCompletedComponent,
+   ChangePhotoComponent,
   ],
   imports: [
     BrowserModule,

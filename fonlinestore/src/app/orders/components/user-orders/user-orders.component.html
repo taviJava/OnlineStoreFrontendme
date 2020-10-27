@@ -1,0 +1,45 @@
+<app-menu-app></app-menu-app>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card my-5">
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th class="align-middle" scope="col">Order number</th>
+              <th class="align-middle" scope="col">Email</th>
+              <th class="align-middle" scope="col">Order status</th>
+              <th class="align-middle" scope="col">Total cost</th>
+              <th class="align-middle" scope="col">
+                <div class="row d-flex align-items-center">
+                  <div class="col">
+                    Operations
+                  </div>
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of orders" >
+              <td>{{ order.id}}</td>
+              <td>{{order.username }}</td>
+              <td>{{order.status }}</td>
+              <td>{{order.totalCost }}</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-outline-primary mx-1" *ngIf="!ifIsCompleted(order.status)" (click)="viewOrder(order.id)"> View </button>
+                  <button class="btn btn-outline-primary mx-1" *ngIf="ifIsCompleted(order.status)" (click)="viewOrderCompleted(order.id)"> view </button>
+
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

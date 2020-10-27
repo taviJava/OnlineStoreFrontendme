@@ -24,6 +24,7 @@ export class ProductViewComponent implements OnInit {
   isLoggedIn = false;
   order: Order = new Order();
   categories: Category[];
+  isCollapsed = true;
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router,
@@ -33,6 +34,7 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.order = new Order();
+    this.order.orderLines = [];
     this.orederLine = new Orderline();
     this.id = this.route.snapshot.params.id;
     this.productService.getById(this.id).subscribe(data => {

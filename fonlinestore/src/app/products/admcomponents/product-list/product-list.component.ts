@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.product = [];
     this.getAll();
   }
 

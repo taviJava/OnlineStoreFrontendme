@@ -7,7 +7,7 @@
   <div class="card-body">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="btn-group" style="padding-right: 300px">
-        <button (click)="add()" class="btn btn-success " > Add </button>
+        <button (click)="add()" class="btn btn-success" > Add </button>
       </div>
       <div class="navbar-nav" style="padding-right: 300px">
         <h4  class="nav-item text-primary text-center"><strong>Users</strong></h4>
@@ -33,9 +33,10 @@
             <p  class="card-text">City: {{user.adress.city}}</p>
             <p  class="card-text">Street: {{user.adress.street}}</p>
             <div class="btn-group">
-              <button (click)="edit(user.id)" class="btn btn-primary mx-1"> Edit </button>
-              <button (click)="open(content, user.id)" class="btn btn-danger"> Delete
+              <button (click)="edit(user.id)" class="btn btn-outline-primary mx-1"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
+              <button (click)="open(content, user.id)" class="btn btn-outline-danger mr-1"> <i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>
+              <button (click)="goToRoles(user.id)" class="btn btn-outline-dark "><i class="fa fa-star " aria-hidden="true"></i></button>
             </div>
           </div>
         </div>

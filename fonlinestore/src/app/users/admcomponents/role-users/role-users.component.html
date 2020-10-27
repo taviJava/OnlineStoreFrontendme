@@ -1,0 +1,31 @@
+<app-menu-app></app-menu-app>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card my-5">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #roleAdd="ngForm">
+<div class="form-group">
+  <label for="productType">Select a role</label>
+
+  <select type="text" [(ngModel)]="user.role"
+          class="form-control"
+          id="productType"
+          name="productType"
+          placeholder="Select user type"
+          required #roleAdd="ngModel">
+
+    <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+  </select>
+  <div class="btn-group" style="padding-top: 15px">
+  <button type="submit" [disabled]="!roleAdd.form.valid"
+          class="btn btn-info">Submit
+  </button>
+  </div>
+</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

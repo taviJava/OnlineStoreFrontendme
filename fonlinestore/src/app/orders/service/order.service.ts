@@ -29,8 +29,8 @@ export class OrderService {
     return this.http.post<Orderline>(`${this.orderUrl}/${username}/${id}`, orderline);
   }
   // tslint:disable-next-line:typedef
-  public update(order: Order) {
-    return this.http.put<Order>(this.orderUrl, order);
+  public update(order: Order, id: number, address: string, comment: string) {
+    return this.http.put<Order>(`${this.orderUrl}/${id}/${address}/${comment}`, order);
   }
 
   public getById(id: number): Observable<any> {
@@ -47,5 +47,18 @@ export class OrderService {
   }
   public getByUserName(username: string): Observable<any> {
     return this.http.get(`${this.orderUrl}/${username}/find`);
+  }
+  // @PostMapping("/ordersPromo/{code}/{id}")
+  // tslint:disable-next-line:typedef
+  public getPromoCode(promoCode: string, id: number, order: Order){
+    return this.http.post<Order>(`${this.orderUrl}Promo/${promoCode}/${id}`, order);
+  }
+  // @PutMapping("/ordersPurchase")
+  // tslint:disable-next-line:typedef
+  public purchase(order: Order) {
+    return this.http.post<Order>(`http://localhost:8080/ordersPurchase`, order);
+  }
+  public findOrdersByUsername(username: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.orderUrl}/${username}/orders`);
   }
 }
