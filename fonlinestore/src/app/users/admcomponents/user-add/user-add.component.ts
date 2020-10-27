@@ -21,10 +21,14 @@ export class UserAddComponent implements OnInit {
   currentFile: File;
   progress = 0;
   message = '';
-  matched = true;
   confirmPassword = '';
+  password = '';
   isLoggedIn = false;
   currentUser: User;
+  // preview photo
+  fileData: File = null;
+  previewUrl: any = null;
+  uploadedFilePath: string = null;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -59,14 +63,13 @@ export class UserAddComponent implements OnInit {
       }
     });
   }
-  // tslint:disable-next-line:typedef
-  matchPasswords() {
+  matchPassword(): boolean{
+    this.password = this.myGroup.get('password').value;
     this.confirmPassword = this.myGroup.get('confirmPassword').value;
-    if (this.user.newPassword === '' || this.user.newPassword === this.confirmPassword) {
-      this.matched = true;
-    } else {
-      this.matched = false;
+    if (this.password === this.confirmPassword){
+      return true;
     }
+    return false;
   }
   // tslint:disable-next-line:typedef
   getAll() {
@@ -94,11 +97,6 @@ export class UserAddComponent implements OnInit {
       5000);
   }
   // tslint:disable-next-line:typedef
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-  }
-
-  // tslint:disable-next-line:typedef
   upload() {
     this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
@@ -122,5 +120,32 @@ export class UserAddComponent implements OnInit {
 
   login(): boolean{
     return this.authService.isLoggedIn.getValue();
+  }
+  // de aici user change photo
+  // tslint:disable-next-line:typedef
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+    this.fileProgress(event);
+  }
+  // tslint:disable-next-line:typedef
+  fileProgress(fileInput: any) {
+    this.fileData = (fileInput.target.files[0] as File);
+    this.preview();
+  }
+
+  // tslint:disable-next-line:typedef
+  preview() {
+    // Show preview
+    const mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fileData);
+    // tslint:disable-next-line:variable-name
+    reader.onload = (_event) => {
+      this.previewUrl = reader.result;
+    };
   }
 }

@@ -1,0 +1,28 @@
+.avatar {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+/*
+codul de mai jos ascunde inputul urat la choose file
+ */
+input[type="file"] {
+  display: none;
+}
+
+
+/*
+steluta rosie la required
+ */
+.stea  {
+  float: left;
+  content:"*";
+  color:red;
+  margin-right: 5px;
+}

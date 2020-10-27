@@ -1,32 +1,68 @@
 <app-menu-app></app-menu-app>
-<div class="container">
+<div class="container" style="margin-top: 20px">
   <div class="row">
-    <div class="col-md-12">
-<div class="card my-5">
+    <div class="col-md-3" style="padding-top: 40px">
+    <div class="text-center">
+
+      <div class="text-center">
+        <div *ngIf="!previewUrl">
+          <img src="https://www.hopkinsmedicine.org/-/media/feature/noimageavailable.ashx" class="avatar img-circle" alt="avatar">
+        </div>
+        <div *ngIf="previewUrl">
+          <img [src]="previewUrl"  class="avatar img-circle" alt="avatar" />
+        </div>
+        <p class="stea" >*</p>
+        <h6 *ngIf="!previewUrl">No photo selected...</h6>
+        <h6 *ngIf="previewUrl">New photo selected...</h6>
+        <div class="btn-group">
+          <label class="btn btn-danger mr-1" > Choose File
+            <input  type="file" name="image" (change)="selectFile($event)" />
+          </label>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="currentFile" class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        attr.aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+  </div>
+
+
+    <div class="card md-9 personal-info" style="width: 800px">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #countryAdd="ngForm">
       <div class="form-group">
+        <p class="stea" >*</p>
         <label for="name">Name</label>
         <input type="text" [(ngModel)]="product.name"
                class="form-control"
                id="name"
                name="name"
                placeholder="Enter product name"
-               required #name="ngModel">
+               [required]="product.name">
       </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
 
       <div class="form-group">
+        <p class="stea" >*</p>
         <label for="description">Description</label>
         <input type="text" [(ngModel)]="product.description"
                class="form-control"
                id="description"
                name="description"
                placeholder="Enter product description"
-               required #description="ngModel">
+               >
       </div>
-      <div [hidden]="!description.pristine" class="alert alert-danger">Description is required</div>
       <div class="form-group">
+        <p class="stea" >*</p>
         <label for="productType">Product Type</label>
 
         <select type="text" [(ngModel)]="product.productType"
@@ -34,39 +70,42 @@
                 id="productType"
                 name="productType"
                 placeholder="Select user type"
-                required #productTypeField="ngModel">
+                required #productType="ngModel"
+                >
 
           <option *ngFor="let prodType of producttypes" [ngValue]="prodType">{{prodType}}</option>
         </select>
 
-        <div [hidden]="!productTypeField.pristine" class="alert alert-danger">Product Type is required</div>
       </div>
       <div class="form-group">
+        <p class="stea" >*</p>
         <label for="price">Price</label>
         <input type="text" [(ngModel)]="product.price"
                class="form-control"
                id="price"
                name="price"
                placeholder="Enter product description"
-               required #price="ngModel">
+               >
       </div>
-      <div [hidden]="!price.pristine" class="alert alert-danger">Price is required</div>
+
       <div class="form-group">
-        <label for="continents">Categories</label>
+        <p class="stea" >*</p>
+        <label for="categories">Categories</label>
         <ng-multiselect-dropdown
           [data]="category"
           [placeholder]="'Select the Category'"
-          id="continents"
+          id="categories"
           [(ngModel)]="selectedCategory"
           [ngModelOptions]="{standalone: true}"
           [settings]="dropdownSettings"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
         >
-          <div [hidden]="" class="alert alert-danger">Categories is required</div>
+
         </ng-multiselect-dropdown>
       </div>
       <div class="form-group">
+        <p class="stea" >*</p>
         <label for="manufacturer">Manufacturers</label>
         <ng-multiselect-dropdown
           [data]="manufacturers"
@@ -78,35 +117,14 @@
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
         >
-          <div [hidden]="" class="alert alert-danger">Manufacturer is required</div>
         </ng-multiselect-dropdown>
       </div>
-
-      <div *ngIf="currentFile" class="progress">
-        <div
-          class="progress-bar progress-bar-info progress-bar-striped"
-          role="progressbar"
-          attr.aria-valuenow="{{ progress }}"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [ngStyle]="{ width: progress + '%' }"
-        >
-          {{ progress }}%
-        </div>
-      </div>
-
-      <label class="btn btn-default">
-        <input type="file" (change)="selectFile($event)" />
-      </label>
-
-
-      <div class="alert alert-light" role="alert">{{ message }}</div>
-
+      <p class="stea" >*</p> <p>These fields are required</p>
       <div class="btn-group">
         <a (click)="getList()"
            class="btn btn-secondary mx-1">Back
         </a>
-        <button type="submit" [disabled]="!countryAdd.form.valid"
+        <button type="submit" [disabled]="(!countryAdd.form.valid && !previewUrl)"
                 class="btn btn-info">Submit
         </button>
       </div>
@@ -115,4 +133,4 @@
 </div>
     </div>
   </div>
-</div>
+

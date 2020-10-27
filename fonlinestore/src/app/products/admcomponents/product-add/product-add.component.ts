@@ -8,6 +8,7 @@ import {CategoryService} from '../../../categories/service/category.service';
 import {Manufacturer} from '../../../manufacturers/model/manufacturer';
 import {ManufacturerService} from '../../../manufacturers/service/manufacturer.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-product-add',
@@ -26,6 +27,12 @@ export class ProductAddComponent implements OnInit {
   currentFile: File;
   progress = 0;
   message = '';
+  // preview photo
+  fileData: File = null;
+  previewUrl: any = null;
+  uploadedFilePath: string = null;
+  // form
+  myGroup: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -35,6 +42,13 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.myGroup = new FormGroup({
+      name: new FormControl(Validators.required),
+      description: new FormControl([Validators.required, Validators.minLength(40)]),
+      productType: new FormControl(Validators.required),
+      price: new FormControl(Validators.required),
+      selectedCategory: new FormControl(Validators.required)
+    });
     this.producttypes.push('piece');
     this.producttypes.push('perKg');
     this.category = [];
@@ -76,10 +90,6 @@ export class ProductAddComponent implements OnInit {
         5000);
     });
   }
-  // tslint:disable-next-line:typedef
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-  }
 
   // tslint:disable-next-line:typedef
   onItemSelect(item: any) {
@@ -108,5 +118,31 @@ export class ProductAddComponent implements OnInit {
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
       });
+  }
+  // tslint:disable-next-line:typedef
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+    this.fileProgress(event);
+  }
+  // tslint:disable-next-line:typedef
+  fileProgress(fileInput: any) {
+    this.fileData = (fileInput.target.files[0] as File);
+    this.preview();
+  }
+
+  // tslint:disable-next-line:typedef
+  preview() {
+    // Show preview
+    const mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fileData);
+    // tslint:disable-next-line:variable-name
+    reader.onload = (_event) => {
+      this.previewUrl = reader.result;
+    };
   }
 }
