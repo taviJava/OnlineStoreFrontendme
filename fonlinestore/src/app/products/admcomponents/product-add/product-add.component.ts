@@ -43,11 +43,12 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.myGroup = new FormGroup({
-      name: new FormControl(Validators.required),
-      description: new FormControl([Validators.required, Validators.minLength(40)]),
-      productType: new FormControl(Validators.required),
-      price: new FormControl(Validators.required),
-      selectedCategory: new FormControl(Validators.required)
+      name: new FormControl(''),
+      description: new FormControl(),
+      productType: new FormControl(),
+      price: new FormControl(),
+      selectedCategory: new FormControl(),
+      selectedManufacturer: new FormControl()
     });
     this.producttypes.push('piece');
     this.producttypes.push('perKg');
@@ -71,6 +72,20 @@ export class ProductAddComponent implements OnInit {
       allowSearchFilter: true
     };
   }
+  formCompleted(): boolean{
+    const name: string = this.myGroup.get('name').value;
+    const description: string = this.myGroup.get('description').value;
+    const price: string = this.myGroup.get('price').value;
+    const productType: any = this.myGroup.get('productType').value;
+    const selectedCategory: any = this.myGroup.get('selectedCategory').value;
+    const selectedManufacturer: any = this.myGroup.get('selectedManufacturer').value;
+    if (name !== '' && description !== '' && price && productType !== null && selectedCategory !== null && selectedManufacturer !== null){
+      if (this.previewUrl){
+        return true;
+      }
+    }
+    return false;
+  }
 
   // tslint:disable-next-line:typedef
   getList() {
@@ -79,6 +94,12 @@ export class ProductAddComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
+    this.product.name = this.myGroup.get('name').value;
+    this.product.description = this.myGroup.get('description').value;
+    this.product.price = this.myGroup.get('price').value;
+    this.product.productType = this.myGroup.get('productType').value;
+    this.selectedCategory = this.myGroup.get('selectedCategory').value;
+    this.selectedManufacturer = this.myGroup.get('selectedManufacturer').value;
     this.product.manufacturer = this.selectedManufacturer[0];
     this.product.category = this.selectedCategory[0];
     this.productService.save(this.product).subscribe(result => {

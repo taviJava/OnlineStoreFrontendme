@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   goToRegister(){
-    this.router.navigate(['addUser']);
+    this.router.navigate(['register']);
   }
   // tslint:disable-next-line:typedef
   addNewOrder(username: string){

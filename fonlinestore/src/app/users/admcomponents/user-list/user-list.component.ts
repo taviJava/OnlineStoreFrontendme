@@ -38,7 +38,9 @@ export class UserListComponent implements OnInit {
       this.users = [];
       this.users = data;
       for (const user of this.users){
-        user.photo = this.getPhoto(user.id);
+        if (this.ifHavePhoto(user)) {
+          user.photo = this.getPhoto(user.id);
+        }
       }
     });
   }
@@ -92,6 +94,13 @@ if (this.users.length > 0){
 // tslint:disable-next-line:typedef
 goToRoles(id: number){
     this.router.navigate(['roleusers/' + id]);
+}
+
+ifHavePhoto(user: User): boolean{
+    if (user.idPhoto !== null){
+      return true;
+    }
+    return false;
 }
 
 }

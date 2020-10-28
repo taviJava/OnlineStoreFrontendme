@@ -32,6 +32,7 @@ private photoUrl: string;
   }
   // tslint:disable-next-line:typedef
   public update(product: Product) {
+    console.log(product);
     return this.http.put<Product>(this.productUrl, product);
   }
   public getById(id: number): Observable<any> {
@@ -57,6 +58,10 @@ public upload(photo: File): Observable<HttpEvent<any>> {
 
   getProductsByCategory(id: number): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.productUrl}/category/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  public deletePhoto(photoId: string) {
+    return this.http.delete(`${this.productUrl}/${photoId}/delete`);
   }
 
 }

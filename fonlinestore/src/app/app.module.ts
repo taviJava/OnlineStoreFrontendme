@@ -48,6 +48,7 @@ import { UserProfileComponent } from './users/componets/user-profile/user-profil
 import { UserOrdersComponent } from './orders/components/user-orders/user-orders.component';
 import { OrderCompletedComponent } from './orders/components/order-completed/order-completed.component';
 import { ChangePhotoComponent } from './users/components/change-photo/change-photo.component';
+import { RegisterComponent } from './users/components/register/register.component';
 
 
 
@@ -87,6 +88,7 @@ import { ChangePhotoComponent } from './users/components/change-photo/change-pho
    UserOrdersComponent,
    OrderCompletedComponent,
    ChangePhotoComponent,
+   RegisterComponent,
   ],
   imports: [
     BrowserModule,

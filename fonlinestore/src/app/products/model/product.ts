@@ -7,6 +7,7 @@ export class Product {
   name: string;
   description: string;
   price: number;
+  idPhoto: string;
   orderline: any;
   productType: string;
   category: Category;

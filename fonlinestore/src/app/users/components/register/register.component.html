@@ -1,8 +1,8 @@
 <head>
   <title></title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <!------ Include the above in your HEAD tag
 ---------->
@@ -81,13 +81,13 @@
               </div>
             </div>
 
-              <div class="row">
+            <div class="row">
 
 
-                <div class=" col-md-6">
+              <div class=" col-md-6">
 
                 <div >
-                <div class="col-md-14 ">
+                  <div class="col-md-14 ">
 
                     <div class="form-group">
                       <p class="stea" >*</p>
@@ -99,7 +99,7 @@
                   </div>
                 </div>
                 <div>
-                <div class="col-md-14 ">
+                  <div class="col-md-14 ">
 
                     <div class="form-group">
                       <p class="stea" >*</p>
@@ -111,55 +111,55 @@
                   </div>
                 </div>
                 <div>
-                <div class="col-md-14 ">
+                  <div class="col-md-14 ">
 
-                  <div class="form-group">
-                    <p class="stea" >*</p>
-                    <label for="zipcode"></label>
-                    <input type="number" name="zipcode" id="zipcode"
-                           formControlName="zipcode"
-                           class="form-control input-sm" placeholder="Zip Code">
+                    <div class="form-group">
+                      <p class="stea" >*</p>
+                      <label for="zipcode"></label>
+                      <input type="number" name="zipcode" id="zipcode"
+                             formControlName="zipcode"
+                             class="form-control input-sm" placeholder="Zip Code">
+                    </div>
                   </div>
                 </div>
               </div>
-                </div>
 
-                <div class="col-md-6" >
-                  <div >
-                    <div class="col-md-14">
-                      <div class="text-center">
-                        <div *ngIf="!previewUrl">
-                          <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" class="avatar img-circle" alt="avatar">
-                        </div>
-                        <div *ngIf="previewUrl">
-                          <img [src]="previewUrl"  class="avatar img-circle" alt="avatar" />
-                        </div>
-                        <h6 *ngIf="!previewUrl">No photo selected...</h6>
-                        <h6 *ngIf="previewUrl">New photo selected...</h6>
+              <div class="col-md-6" >
+                <div >
+                  <div class="col-md-14">
+                    <div class="text-center">
+                      <div *ngIf="!previewUrl">
+                        <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" class="avatar img-circle" alt="avatar">
+                      </div>
+                      <div *ngIf="previewUrl">
+                        <img [src]="previewUrl"  class="avatar img-circle" alt="avatar" />
+                      </div>
+                      <h6 *ngIf="!previewUrl">No photo selected...</h6>
+                      <h6 *ngIf="previewUrl">New photo selected...</h6>
+                      <div class="btn-group">
                         <div class="btn-group">
-                          <div class="btn-group">
-                            <label > <i class="fa fa-upload fa-3x fa-check" ></i>
-                              <input  type="file" name="image" (change)="selectFile($event)" />
-                            </label>
-                          </div>
+                          <label > <i class="fa fa-upload fa-3x fa-check" ></i>
+                            <input  type="file" name="image" (change)="selectFile($event)" />
+                          </label>
                         </div>
+                      </div>
 
-                      </div>
                     </div>
-                    <div *ngIf="currentFile" class="progress">
-                      <div
-                        class="progress-bar progress-bar-info progress-bar-striped"
-                        role="progressbar"
-                        attr.aria-valuenow="{{ progress }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        [ngStyle]="{ width: progress + '%' }"
-                      >
-                        {{ progress }}%
-                      </div>
+                  </div>
+                  <div *ngIf="currentFile" class="progress">
+                    <div
+                      class="progress-bar progress-bar-info progress-bar-striped"
+                      role="progressbar"
+                      attr.aria-valuenow="{{ progress }}"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      [ngStyle]="{ width: progress + '%' }"
+                    >
+                      {{ progress }}%
                     </div>
                   </div>
                 </div>
+              </div>
 
 
             </div>
@@ -167,9 +167,9 @@
             <p></p>
             <div class="btn-group">
 
-            <button type="submit"  class="btn btn-primary " [disabled]="!formCompleted()">
-              Register
-            </button>
+              <button type="submit"  class="btn btn-primary " [disabled]="!formCompleted()">
+                Register
+              </button>
             </div>
 
           </form>

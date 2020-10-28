@@ -25,6 +25,7 @@ export class UserEditComponent implements OnInit {
   message = '';
   matched = true;
   confirmPassword = '';
+  password = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -84,8 +85,9 @@ export class UserEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   changePhoto(){
-    this.userService.deletePhoto(this.user.idPhoto).subscribe();
-    this.upload();
+    this.userService.deletePhoto(this.user.idPhoto).subscribe(data =>{
+      this.upload();
+    });
     setTimeout(() =>
       {
         this.goToUser();
@@ -157,5 +159,32 @@ export class UserEditComponent implements OnInit {
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
     };
+  }
+  matchPassword(): boolean{
+    this.password = this.myGroup.get('password').value;
+    this.confirmPassword = this.myGroup.get('confirmPassword').value;
+    if (this.password === this.confirmPassword){
+      return true;
+    }
+    return false;
+  }
+  formCompleted(): boolean{
+    const name: string = this.myGroup.get('name').value;
+    const phone: string = this.myGroup.get('phone').value;
+    const password: string = this.myGroup.get('password').value;
+    const street: string = this.myGroup.get('street').value;
+    const city: string = this.myGroup.get('city').value;
+    const zipcode: string = this.myGroup.get('zipcode').value;
+    const country: string = this.myGroup.get('country').value;
+    if (name !== '' && phone !== '' && password && street !== '' && city !== '' && zipcode !== '' && country !== ''){
+      return true;
+    }
+    return false;
+  }
+  ifHavePhoto(user: User): boolean{
+    if (user.idPhoto !== null){
+      return true;
+    }
+    return false;
   }
 }

@@ -79,7 +79,8 @@ export class UserAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.user.fullName = this.myGroup.get('name').value;
-    this.user.phone = this.myGroup.get('phone').value;
+    const num: number = this.myGroup.get('phone').value;
+    this.user.phone = JSON.parse(String(num));
     this.user.email = this.myGroup.get('email').value;
     this.user.password = this.myGroup.get('password').value;
     this.address.street = this.myGroup.get('street').value;
@@ -88,13 +89,21 @@ export class UserAddComponent implements OnInit {
     this.address.country = this.myGroup.get('country').value;
     this.user.adress = this.address;
     this.userService.save(this.user).subscribe(result => {
+      if (this.previewUrl){
+        this.changePhoto();
+      }else {
+        this.getAll();
+      }
     });
-    this.upload();
-    setTimeout(() =>
+  }
+  // tslint:disable-next-line:typedef
+  changePhoto(){
+      this.upload();
+      setTimeout(() =>
       {
-        this.router.navigate(['users']);
+        this.getAll();
       },
-      5000);
+      4000);
   }
   // tslint:disable-next-line:typedef
   upload() {
@@ -147,5 +156,18 @@ export class UserAddComponent implements OnInit {
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
     };
+  }
+  formCompleted(): boolean{
+    const name: string = this.myGroup.get('name').value;
+    const phone: string = this.myGroup.get('phone').value;
+    const password: string = this.myGroup.get('password').value;
+    const street: string = this.myGroup.get('street').value;
+    const city: string = this.myGroup.get('city').value;
+    const zipcode: string = this.myGroup.get('zipcode').value;
+    const country: string = this.myGroup.get('country').value;
+    if (name !== '' && phone !== '' && password && street !== '' && city !== '' && zipcode !== '' && country !== ''){
+      return true;
+    }
+    return false;
   }
 }

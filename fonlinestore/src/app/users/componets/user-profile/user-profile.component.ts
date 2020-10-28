@@ -40,4 +40,11 @@ export class UserProfileComponent implements OnInit {
   goToChangePhoto(){
     this.router.navigate(['changePhoto/' + this.user.id]);
   }
+
+  ifHavePhoto(user: User): boolean{
+    if (user.idPhoto !== null){
+      return true;
+    }
+    return false;
+  }
 }

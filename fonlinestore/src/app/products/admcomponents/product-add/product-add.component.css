@@ -26,3 +26,10 @@ steluta rosie la required
   color:red;
   margin-right: 5px;
 }
+.stea2  {
+  float: left;
+  content:"*";
+  color:red;
+  margin-left: 10px;
+  padding-left: 10px;
+}

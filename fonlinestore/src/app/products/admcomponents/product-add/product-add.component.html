@@ -11,8 +11,9 @@
         <div *ngIf="previewUrl">
           <img [src]="previewUrl"  class="avatar img-circle" alt="avatar" />
         </div>
-        <p class="stea" >*</p>
-        <h6 *ngIf="!previewUrl">No photo selected...</h6>
+        <p></p>
+        <p *ngIf="!previewUrl"  class="stea2" >*</p>
+        <p *ngIf="!previewUrl" >You must select a photo for product...</p>
         <h6 *ngIf="previewUrl">New photo selected...</h6>
         <div class="btn-group">
           <label class="btn btn-danger mr-1" > Choose File
@@ -39,22 +40,22 @@
 
     <div class="card md-9 personal-info" style="width: 800px">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #countryAdd="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]= myGroup >
       <div class="form-group">
         <p class="stea" >*</p>
         <label for="name">Name</label>
-        <input type="text" [(ngModel)]="product.name"
+        <input type="text" formControlName="name"
                class="form-control"
                id="name"
                name="name"
                placeholder="Enter product name"
-               [required]="product.name">
+               >
       </div>
 
       <div class="form-group">
         <p class="stea" >*</p>
         <label for="description">Description</label>
-        <input type="text" [(ngModel)]="product.description"
+        <input type="text" formControlName="description"
                class="form-control"
                id="description"
                name="description"
@@ -65,12 +66,11 @@
         <p class="stea" >*</p>
         <label for="productType">Product Type</label>
 
-        <select type="text" [(ngModel)]="product.productType"
+        <select type="text" formControlName="productType"
                 class="form-control"
                 id="productType"
                 name="productType"
-                placeholder="Select user type"
-                required #productType="ngModel"
+                placeholder="Select the product type"
                 >
 
           <option *ngFor="let prodType of producttypes" [ngValue]="prodType">{{prodType}}</option>
@@ -80,11 +80,11 @@
       <div class="form-group">
         <p class="stea" >*</p>
         <label for="price">Price</label>
-        <input type="text" [(ngModel)]="product.price"
+        <input type="number" formControlName="price"
                class="form-control"
                id="price"
                name="price"
-               placeholder="Enter product description"
+               placeholder="Enter product price"
                >
       </div>
 
@@ -95,8 +95,7 @@
           [data]="category"
           [placeholder]="'Select the Category'"
           id="categories"
-          [(ngModel)]="selectedCategory"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="selectedCategory"
           [settings]="dropdownSettings"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
@@ -106,13 +105,12 @@
       </div>
       <div class="form-group">
         <p class="stea" >*</p>
-        <label for="manufacturer">Manufacturers</label>
+        <label for="manufacturer">Manufacturer</label>
         <ng-multiselect-dropdown
           [data]="manufacturers"
           [placeholder]="'Select the Manufacturer'"
           id="manufacturer"
-          [(ngModel)]="selectedManufacturer"
-          [ngModelOptions]="{standalone: true}"
+          formControlName="selectedManufacturer"
           [settings]="dropdownSettings"
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onSelectAll($event)"
@@ -124,7 +122,7 @@
         <a (click)="getList()"
            class="btn btn-secondary mx-1">Back
         </a>
-        <button type="submit" [disabled]="(!countryAdd.form.valid && !previewUrl)"
+        <button type="submit" [disabled]="!formCompleted()"
                 class="btn btn-info">Submit
         </button>
       </div>

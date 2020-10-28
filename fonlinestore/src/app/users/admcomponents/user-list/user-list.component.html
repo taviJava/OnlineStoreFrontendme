@@ -9,7 +9,7 @@
       <div class="btn-group" style="padding-right: 300px">
         <button (click)="add()" class="btn btn-success" > Add </button>
       </div>
-      <div class="navbar-nav" style="padding-right: 300px">
+      <div class="navbar-nav" style="padding-right: 350px">
         <h4  class="nav-item text-primary text-center"><strong>Users</strong></h4>
       </div>
       <div class="form-inline" >
@@ -23,16 +23,25 @@
       </div>
     </nav>
 
-    <div class="row">
+    <div class="row" style="margin-top: 20px">
       <div class="col-sm-4"  *ngFor="let user of users | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
         <div class="card text-black-50 bg-light mb-4">
           <div class="card-body" >
+            <div *ngIf="!ifHavePhoto(user)">
+              <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg"   height="250px"  class="card-img-top" alt="...">
+            </div>
+            <div *ngIf="ifHavePhoto(user)">
             <img *ngIf="user.photo | async as photo"  [src]="photo[0].url"   height="250px"  class="card-img-top" alt="...">
-              <h5 class="card-title">Email: {{user.email}} </h5>
-            <p  class="card-text">Country: {{user.adress.country}}</p>
-            <p  class="card-text">City: {{user.adress.city}}</p>
-            <p  class="card-text">Street: {{user.adress.street}}</p>
-            <div class="btn-group">
+            </div>
+            <div style="margin-top: 10px">
+              <h6 class="card-title">Name: {{user.fullName}}</h6>
+            <h6 class="card-text">Email: {{user.email}} </h6>
+            <h6  class="card-text">Country: {{user.adress.country}}</h6>
+            <h6  class="card-text">City: {{user.adress.city}}</h6>
+            <h6  class="card-text">Street: {{user.adress.street}}</h6>
+              <h6  class="card-text">Mobile: {{user.phone}}</h6>
+            </div>
+            <div class="btn-group" style="margin-top: 10px">
               <button (click)="edit(user.id)" class="btn btn-outline-primary mx-1"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
               <button (click)="open(content, user.id)" class="btn btn-outline-danger mr-1"> <i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>

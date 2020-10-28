@@ -32,6 +32,7 @@ import {UserOrdersComponent} from './orders/components/user-orders/user-orders.c
 import {OrderCompletedComponent} from './orders/components/order-completed/order-completed.component';
 import {AboutUsComponent} from './common/aboutus/about-us/about-us.component';
 import {ChangePhotoComponent} from './users/components/change-photo/change-photo.component';
+import {RegisterComponent} from './users/components/register/register.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
@@ -61,11 +62,12 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'promoCode', component: PromoCodeListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addPromoCode', component: PromoCodeAddComponent, canActivate: [AuthGuard2Service]},
   {path: 'editPromoCode/:id', component: PromoCodeEditComponent, canActivate: [AuthGuard2Service]},
-  {path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuard2Service]},
-  {path: 'userOrders', component: UserOrdersComponent, canActivate: [AuthGuard2Service]},
-  {path: 'orderCompleted/:id', component: OrderCompletedComponent, canActivate: [AuthGuard2Service]},
+  {path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'userOrders', component: UserOrdersComponent, canActivate: [AuthGuardService]},
+  {path: 'orderCompleted/:id', component: OrderCompletedComponent, canActivate: [AuthGuardService]},
   {path: 'aboutUs', component: AboutUsComponent, canActivate: [AuthGuardService]},
-  {path: 'changePhoto/:id', component: ChangePhotoComponent, canActivate: [AuthGuardService] }
+  {path: 'changePhoto/:id', component: ChangePhotoComponent, canActivate: [AuthGuardService] },
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

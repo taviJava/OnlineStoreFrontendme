@@ -1,25 +1,18 @@
-import {Component,  OnInit} from '@angular/core';
-import {ProductService} from '../../../products/services/product.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {OrderService} from '../../../orders/service/order.service';
-import {AuthenticationService} from '../../../users/service/authentication.service';
-import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
-import {OrderAddComponent} from '../../../orders/components/order-add/order-add.component';
-import {User} from '../../../users/model/user';
+import { Component, OnInit } from '@angular/core';
+import {User} from '../../model/user';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Address} from '../../../users/model/address';
-import {UserService} from '../../../users/service/user.service';
-
-
-
+import {Address} from '../../model/address';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../../service/user.service';
+import {AuthenticationService} from '../../service/authentication.service';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class TestComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   user: User = new User();
   myGroup: FormGroup;
   address: Address;
@@ -39,10 +32,10 @@ export class TestComponent implements OnInit {
   email = '';
   name = '';
   phone = '';
-   street = '';
-   city = '';
-   zipcode = '';
-   country = '';
+  street = '';
+  city = '';
+  zipcode = '';
+  country = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
