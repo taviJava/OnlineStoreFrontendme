@@ -14,14 +14,14 @@ export class ManufacturerEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private manufacturerService: ManufacturerService,) {
+              private manufacturerService: ManufacturerService) {
   }
 
   ngOnInit(): void {
     this.manufacturer = new Manufacturer();
     this.id = this.route.snapshot.params.id;
     this.manufacturerService.getById(this.id).subscribe(data => {
-    //  this.manufacturer = new Manufacturer();
+      this.manufacturer = new Manufacturer();
       this.manufacturer = data;
     });
   }

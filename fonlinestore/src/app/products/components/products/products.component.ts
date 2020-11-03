@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
   isLoggedIn = false;
   categories: Category[];
   isCollapsed = true;
+  description = '';
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -69,7 +70,10 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
+ getDescription(product: Product): string{
+   this.description =  product.description.substring(0, 15) + '...';
+   return this.description;
+ }
 
   // tslint:disable-next-line:typedef
   addAll() {

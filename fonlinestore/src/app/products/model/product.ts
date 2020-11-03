@@ -1,6 +1,7 @@
 import {Category} from '../../categories/model/category';
 import {Manufacturer} from '../../manufacturers/model/manufacturer';
 import {Observable} from 'rxjs';
+import {Review} from './review';
 
 export class Product {
   id: number;
@@ -13,4 +14,6 @@ export class Product {
   category: Category;
   manufacturer: Manufacturer;
   photo: Observable<any>;
+  reviewList: Review[];
+  reviewAverage: number;
 }

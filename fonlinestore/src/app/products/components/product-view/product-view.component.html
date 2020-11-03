@@ -149,13 +149,10 @@
         <h2 class="name">
           {{product.name}}
           <p></p>
-          <i class="fa fa-star fa-2x text-primary"></i>
-          <i class="fa fa-star fa-2x text-primary"></i>
-          <i class="fa fa-star fa-2x text-primary"></i>
-          <i class="fa fa-star fa-2x text-primary"></i>
-          <i class="fa fa-star fa-2x text-muted"></i>
-          <span class="fa fa-2x"><h5>(109) Votes</h5></span>
-          <a >109 customer reviews</a>
+          <i *ngFor="let num of numberList" class="fa fa-star fa-2x text-primary"></i>
+          <i *ngFor="let num of numberListDif" class="fa fa-star fa-2x text-muted"></i>
+          <span class="fa fa-2x"><h5>({{product.reviewList.length}}) Votes</h5></span>
+          <a (click)="goToReviews()">{{product.reviewList.length}}. customer reviews</a>
         </h2>
         <hr />
         <h3 class="price-container">

@@ -30,6 +30,8 @@ export class CategoryService {
 
   // tslint:disable-next-line:typedef
   public update(category: Category) {
+    console.log(category.id);
+    console.log(category.name);
     return this.http.put<Category>(this.categoryUrl, category);
   }
 

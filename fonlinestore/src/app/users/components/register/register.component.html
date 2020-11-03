@@ -167,7 +167,12 @@
             <p></p>
             <div class="btn-group">
 
-              <button type="submit"  class="btn btn-primary " [disabled]="!formCompleted()">
+              <button *ngIf="!ifEmailExist()"  type="submit"  class="btn btn-primary " [disabled]="!formCompleted()">
+                Register
+              </button>
+              <button *ngIf="ifEmailExist()" class="btn btn-primary "
+                      (click)=open(content)
+                      [disabled]="!formCompleted()">
                 Register
               </button>
             </div>
@@ -179,3 +184,15 @@
   </div>
 </div>
 </html>
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Your email is already registered!!! If you forgot your password please click on: Forgot password
+      </div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Ok</button>
+  </div>
+</ng-template>

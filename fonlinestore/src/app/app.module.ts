@@ -49,6 +49,10 @@ import { UserOrdersComponent } from './orders/components/user-orders/user-orders
 import { OrderCompletedComponent } from './orders/components/order-completed/order-completed.component';
 import { ChangePhotoComponent } from './users/components/change-photo/change-photo.component';
 import { RegisterComponent } from './users/components/register/register.component';
+import { ReviewAddComponent } from './products/components/review-add/review-add.component';
+import {CommonModule} from '@angular/common';
+import { ForgotMypswComponent } from './users/components/forgot-mypsw/forgot-mypsw.component';
+import { PasswordUpdateComponent } from './users/components/password-update/password-update.component';
 
 
 
@@ -89,6 +93,9 @@ import { RegisterComponent } from './users/components/register/register.componen
    OrderCompletedComponent,
    ChangePhotoComponent,
    RegisterComponent,
+   ReviewAddComponent,
+   ForgotMypswComponent,
+   PasswordUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +103,7 @@ import { RegisterComponent } from './users/components/register/register.componen
     NgbModule,
     FormsModule,
     HttpClientModule,
+    CommonModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),

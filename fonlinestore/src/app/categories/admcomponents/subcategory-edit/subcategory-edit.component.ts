@@ -13,7 +13,7 @@ export class SubcategoryEditComponent implements OnInit {
   subcategory: Category = new Category();
   dropdownSettings: IDropdownSettings = {};
   categories: Category[] = [];
-  selectedCategories: Category[];
+  selectedCategories: Category[] = [];
   id: number;
 
   constructor(private route: ActivatedRoute,
@@ -55,7 +55,7 @@ export class SubcategoryEditComponent implements OnInit {
 // tslint:disable-next-line:typedef
   onSubmit() {
     this.subcategory.parent = this.selectedCategories[0];
-    this.categoryservice.save(this.subcategory).subscribe(result => this.getAll());
+    this.categoryservice.update(this.subcategory).subscribe(result => this.getAll());
   }
 
 // tslint:disable-next-line:typedef

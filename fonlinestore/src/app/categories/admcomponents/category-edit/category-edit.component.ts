@@ -23,6 +23,8 @@ export class CategoryEditComponent implements OnInit {
     this.categoryService.getById(this.id).subscribe(data => {
       this.category = new Category();
       this.category = data;
+      console.log(this.category);
+      console.log(this.id);
     });
   }
 

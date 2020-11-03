@@ -47,11 +47,11 @@ export class ProductEditComponent implements OnInit {
     this.selectedManufacturer = [];
     this.producttypes = [];
     this.id = this.route.snapshot.params.id;
-    this.productService.getById(this.id).subscribe(data => {
+    this.productService.getById(this.id).subscribe(product => {
       this.product = new Product();
       this.selectedCategory = [];
       this.selectedManufacturer = [];
-      this.product = data;
+      this.product = product;
       this.product.photo = this.getPhoto(this.id);
       this.selectedCategory.push(this.product.category);
       this.selectedManufacturer.push(this.product.manufacturer);
@@ -110,7 +110,7 @@ export class ProductEditComponent implements OnInit {
   upload() {
     this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
-    this.productService.upload(this.currentFile).subscribe(
+    this.productService.uploadUpdate(this.currentFile, this.id).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);

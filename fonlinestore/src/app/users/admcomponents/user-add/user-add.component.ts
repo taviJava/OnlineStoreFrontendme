@@ -29,6 +29,7 @@ export class UserAddComponent implements OnInit {
   fileData: File = null;
   previewUrl: any = null;
   uploadedFilePath: string = null;
+  users: User[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,6 +40,11 @@ export class UserAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.users = [];
+    this.userService.findAll().subscribe( data => {
+      this.users = [];
+      this.users = data;
+    });
     this.user = new User();
     this.address = new Address();
     this.myGroup = new FormGroup({
@@ -170,4 +176,14 @@ export class UserAddComponent implements OnInit {
     }
     return false;
   }
+
+  ifEmailExist(): boolean{
+    const name: string = this.myGroup.get('email').value;
+    for (const user of this.users){
+      if (name === user.email){
+        return true;
+      }
+    }
+  }
+
 }
