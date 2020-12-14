@@ -150,13 +150,14 @@
     </nav>
 
     <div class="row">
-      <div class="col-sm-4"  *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+      <div class="col-sm-4"  *ngFor="let prod of product | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}" style="margin-top: 20px">
         <div class="card text-black-50 bg-light mb-4">
           <div class="card-body" >
             <img *ngIf="prod.photo | async as photo"  [src]="photo[0].url"   height="250px"  class="card-img-top" alt="...">
             <div style="height: 100px">
               <h5 class="card-title">{{prod.name}}</h5>
-              <p  class="card-text">{{prod.description}}</p>
+              <h6  class="card-text">{{getDescription(prod)}}</h6>
+              <h6  class="card-text">Price: {{prod.price}}$</h6>
             </div>
             <div class="btn-group">
               <button (click)="viewProduct(prod.id)" class="btn btn-primary"> View

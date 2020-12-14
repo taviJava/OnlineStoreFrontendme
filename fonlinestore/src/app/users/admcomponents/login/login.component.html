@@ -28,7 +28,7 @@
                              id="password">
                     </div>
                     <button type="submit" (click)="handleLogin()" class="btn btn-theme">Login</button>
-                    <a  class="forgot-link float-right text-primary">Forgot password?</a>
+                    <a [routerLink]="['forgot-password']" class="forgot-link float-right text-primary">Forgot password?</a>
                   </form>
                 </div>
               </div>

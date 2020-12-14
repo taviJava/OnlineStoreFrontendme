@@ -4,6 +4,12 @@ body{
   text-align: left;
   background-color: #e2e8f0;
 }
+.avatar {
+  vertical-align: middle;
+  width: 180px;
+  height: 200px;
+  border-radius: 50%;
+}
 .main-body {
   padding: 15px;
 }

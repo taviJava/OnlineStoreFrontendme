@@ -1,0 +1,156 @@
+<link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css"
+      integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous"
+      xmlns:width="http://www.w3.org/1999/xhtml">
+<app-menu-app></app-menu-app>
+<div class="container">
+  <div class="col-md-12">
+    <div class="offer-dedicated-body-left">
+      <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+
+          <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
+            <h5 class="mb-0 mb-4" id="top">Ratings and Reviews</h5>
+            <div class="graph-star-rating-header">
+              <div class="star-rating">
+                <i *ngFor="let num of numberList" class="fa fa-star fa-md text-primary"></i>
+                <i *ngFor="let num of numberListDif" class="fa fa-star fa-md text-muted"></i>
+                <b class="text-black ml-2">{{reviewsNumber}} reviews</b>
+              </div>
+              <p class="text-black mb-4 mt-2">Rated {{product.reviewAverage}} out of 5</p>
+            </div>
+            <div class="graph-star-rating-body">
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                  5 Star
+                </div>
+                <div class="rating-list-center">
+                  <div class="progress">
+                    <div style="width:0{{percentFive}}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rating-list-right text-black">{{percentFive}}%</div>
+              </div>
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                  4 Star
+                </div>
+                <div class="rating-list-center">
+                  <div class="progress">
+                    <div style="width: 0{{percentFor}}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rating-list-right text-black">{{percentFor}}%</div>
+              </div>
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                  3 Star
+                </div>
+                <div class="rating-list-center">
+                  <div class="progress">
+                    <div style="width: 0{{percentThree}}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rating-list-right text-black">{{percentThree}}%</div>
+              </div>
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                  2 Star
+                </div>
+                <div class="rating-list-center">
+                  <div class="progress">
+                    <div style="width: 0{{percentTwo}}%"  aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rating-list-right text-black">{{percentTwo}}%</div>
+              </div>
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                  1 Star
+                </div>
+                <div class="rating-list-center">
+                  <div class="progress">
+                    <div style="width: 0{{percentOne}}%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rating-list-right text-black">{{percentOne}}%</div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
+            <h5 class="mb-1">All Ratings and Reviews</h5>
+            <div class="reviews-members pt-4 pb-4">
+              <div class="media d-block mt-4" *ngFor="let review of reviews | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}" >
+                <div *ngIf="!ifHavePhoto(review.userDto)">
+                  <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" alt="Generic placeholder image" class="mr-3 rounded-pill" >
+                </div>
+                <div *ngIf="ifHavePhoto(review.userDto)">
+                  <img alt="Generic placeholder image"  *ngIf="review.userDto.photo | async as photo " [src]="photo[0].url" class="mr-3 rounded-pill">
+                </div>
+
+                <div class="media-body">
+                  <div class="reviews-members-header">
+                                    <span class="star-rating float-right">
+                                          <a *ngFor="let num of review.ratingList"><i class="icofont-ui-rating active"></i></a>
+                                          </span>
+                    <h6 class="mb-1"><a class="text-black" >Name: {{review.fullname}}</a></h6>
+                    <h6 class="text-gray">On: {{review.date}}</h6>
+                  </div>
+                  <div class="reviews-members-body">
+                    <p>{{review.comment}} </p>
+                  </div>
+
+                </div>
+              </div>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </div>
+          <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
+            <h5 class="mb-4" >Leave Comment</h5>
+            <div class="mb-4">
+                        <span class="star-rating" >
+                                 <a  [routerLink]="['#']" (click)="setReview1Star()"><i class="icofont-ui-rating icofont-2x"></i></a>
+                                 <a [routerLink]="['#']" (click)="setReview2Star()"><i class="icofont-ui-rating icofont-2x"></i></a>
+                                 <a [routerLink]="['#']" (click)="setReview3Star()"><i class="icofont-ui-rating icofont-2x"></i></a>
+                                 <a [routerLink]="['#']" (click)="setReview4Star()"><i class="icofont-ui-rating icofont-2x"></i></a>
+                                 <a [routerLink]="['#']" (click)="setReview5Star()"><i class="icofont-ui-rating icofont-2x"></i></a>
+
+                                 </span>
+
+            </div>
+
+            <div>
+              <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label for="comment">Your Comment</label>
+                  <textarea id="comment" class="form-control" [(ngModel)]="review.comment"
+                            [ngModelOptions]="{standalone: true}">
+                </textarea>
+                </div>
+                <div class="group">
+                  <button type="submit" class="btn btn-primary btn-sm mr-2" > Submit Comment </button>
+                  <div class="clasa">
+                    <h6 class="mr-1" style="float: left">Your vote is: </h6>
+                    <span class="star-rating" >
+                                 <a  [routerLink]="['#']" *ngFor="let star of numberList"><i class="icofont-ui-rating icofont-md"></i></a>
+                                 </span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -87,7 +87,7 @@ changePhoto(){
   upload() {
     this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
-    this.userService.upload(this.currentFile).subscribe(
+    this.userService.UploadUpdate(this.currentFile, this.id).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -134,6 +134,13 @@ changePhoto(){
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
     };
+  }
+
+  ifHavePhoto(user: User): boolean{
+    if (user.idPhoto !== null){
+      return true;
+    }
+    return false;
   }
 
 }

@@ -6,7 +6,9 @@
         <div class="text-center">
 
           <div class="text-center">
-            <div *ngIf="!ifHavePhoto(user)"><img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" class="avatar img-circle" alt="avatar"></div>
+            <div *ngIf="(!ifHavePhoto(user) && !previewUrl)">
+              <img src="https://tanzolymp.com/images/default-non-user-no-photo-1.jpg" class="avatar img-circle" alt="avatar">
+            </div>
             <div *ngIf="ifHavePhoto(user)">
             <div *ngIf="!previewUrl">
               <img *ngIf="user.photo | async as photo "  [src]="photo[0].url"  class="avatar img-circle" alt="avatar">

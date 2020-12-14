@@ -33,6 +33,11 @@ import {OrderCompletedComponent} from './orders/components/order-completed/order
 import {AboutUsComponent} from './common/aboutus/about-us/about-us.component';
 import {ChangePhotoComponent} from './users/components/change-photo/change-photo.component';
 import {RegisterComponent} from './users/components/register/register.component';
+import {CategoryEditComponent} from './categories/admcomponents/category-edit/category-edit.component';
+import {SubcategoryEditComponent} from './categories/admcomponents/subcategory-edit/subcategory-edit.component';
+import {ReviewAddComponent} from './products/components/review-add/review-add.component';
+import {ForgotMypswComponent} from './users/components/forgot-mypsw/forgot-mypsw.component';
+import {PasswordUpdateComponent} from './users/components/password-update/password-update.component';
 
 const routes: Routes = [{path: 'products', component: ProductListComponent, canActivate: [AuthGuard2Service]},
   {path: 'addProduct', component: ProductAddComponent, canActivate: [AuthGuard2Service]},
@@ -47,8 +52,8 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'roleusers/:id', component: RoleUsersComponent, canActivate: [AuthGuard2Service]},
   {path: 'addUser', component: UserAddComponent},
   {path: 'editUser/:id', component: UserEditComponent, canActivate: [AuthGuard2Service]},
-  {path: 'editCategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
-  {path: 'editsubcategory/:id', component: AddCategoryComponent, canActivate: [AuthGuard2Service]},
+  {path: 'editCategory/:id', component: CategoryEditComponent, canActivate: [AuthGuard2Service]},
+  {path: 'editsubcategory/:id', component: SubcategoryEditComponent, canActivate: [AuthGuard2Service]},
   {path: 'orders', component: OrderListComponent, canActivate: [AuthGuard2Service]},
   {path: 'viewProduct/:id', component: ProductViewComponent, canActivate: [AuthGuardService]},
   {path: 'viewOrder/:id', component: OrderComponent, canActivate: [AuthGuardService]},
@@ -68,6 +73,9 @@ const routes: Routes = [{path: 'products', component: ProductListComponent, canA
   {path: 'aboutUs', component: AboutUsComponent, canActivate: [AuthGuardService]},
   {path: 'changePhoto/:id', component: ChangePhotoComponent, canActivate: [AuthGuardService] },
   {path: 'register', component: RegisterComponent},
+  {path: 'forgot-password', component: ForgotMypswComponent},
+  {path: 'update-password/:token/:id', component: PasswordUpdateComponent},
+  {path: 'review/:id', component: ReviewAddComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

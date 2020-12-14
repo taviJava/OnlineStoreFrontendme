@@ -25,6 +25,8 @@ export class ProductViewComponent implements OnInit {
   order: Order = new Order();
   categories: Category[];
   isCollapsed = true;
+  numberList: number[] = [];
+  numberListDif: number[] = [];
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router,
@@ -33,13 +35,18 @@ export class ProductViewComponent implements OnInit {
               private catService: CategoryService) { }
 
   ngOnInit(): void {
+    this.numberList = [];
+    this.numberListDif = [];
     this.order = new Order();
     this.order.orderLines = [];
     this.orederLine = new Orderline();
+    this.product.reviewList = [];
     this.id = this.route.snapshot.params.id;
     this.productService.getById(this.id).subscribe(data => {
       this.product = new Product();
       this.product = data;
+      this.addNumber();
+      this.addNumberDif();
       this.product.photo = this.productService.getPhotos(this.id);
     });
     this.authService.isLoggedIn.subscribe(data => {
@@ -102,5 +109,25 @@ export class ProductViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   backToProducts(){
     this.router.navigate(['productsSt']);
+  }
+  // tslint:disable-next-line:typedef
+  goToReviews(){
+    this.router.navigate(['review/' + this.id]);
+  }
+  // tslint:disable-next-line:typedef
+  addNumber(){
+    let a = 0;
+    while (a !== Math.round(this.product.reviewAverage)){
+      this.numberList.push(a);
+      a++;
+    }
+  }
+  // tslint:disable-next-line:typedef
+  addNumberDif(){
+    let a = 0;
+    while (a !== (5 - this.numberList.length)){
+      this.numberListDif.push(a);
+      a++;
+    }
   }
 }

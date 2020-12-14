@@ -52,6 +52,16 @@ public upload(photo: File): Observable<HttpEvent<any>> {
   return this.http.request(req);
 }
 
+  public uploadUpdate(photo: File, id: number): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('photo', photo);
+    const req = new HttpRequest('PUT', `http://localhost:8080/photop/${id}`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
   getPhotos(id: number): Observable<any> {
     return this.http.get(`http://localhost:8080/photoP/${id}`);
   }

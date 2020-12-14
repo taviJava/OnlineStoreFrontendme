@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -37,15 +38,25 @@ export class RegisterComponent implements OnInit {
   zipcode = '';
   country = '';
 
+  users: User[] = [];
+
+  closeResult = '';
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private modalService: NgbModal) {
     this.currentUser = new User();
     this.currentUser.email = 'Please Log-in';
   }
 
   ngOnInit(): void {
+    this.users = [];
+    this.userService.findAll().subscribe( data => {
+      this.users = [];
+      this.users = data;
+    });
     this.user = new User();
     this.address = new Address();
     this.myGroup = new FormGroup({
@@ -195,6 +206,33 @@ export class RegisterComponent implements OnInit {
     }
     if (this.myGroup.get('country').value !== null){
       this.country = this.myGroup.get('country').value;
+    }
+  }
+  ifEmailExist(): boolean{
+    const name: string = this.myGroup.get('email').value;
+    for (const user of this.users){
+      if (name === user.email){
+        return true;
+      }
+    }
+  }
+  // modal
+  // tslint:disable-next-line:typedef
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
   }
 }
