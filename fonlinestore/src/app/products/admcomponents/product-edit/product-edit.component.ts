@@ -165,7 +165,7 @@ export class ProductEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   changePhoto(){
-    this.productService.deletePhoto(this.product.idPhoto).subscribe(data =>{
+    this.productService.deletePhoto(this.product.idPhoto).subscribe(data => {
       this.upload();
     });
     setTimeout(() =>
